@@ -35,26 +35,26 @@
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/taksi" />
 
-        <TextView
-            android:id="@+id/loginTextView"
+        <EditText
+            android:id="@+id/loginEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="145dp"
             android:layout_marginRight="20dp"
-            android:text="Login text"
+            android:hint="Login text"
             android:textSize="25dp"
 
             />
 
-        <TextView
-            android:id="@+id/passwordTextView"
+        <EditText
+            android:id="@+id/passwordEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="195dp"
             android:layout_marginRight="20dp"
-            android:text="Password Text"
+            android:hint="Password Text"
             android:textSize="25dp"
 
             />
@@ -72,6 +72,7 @@
         android:layout_marginTop="35dp"
         android:textSize="25dp"
         android:background="@drawable/login_card_shape"
+        android:id="@+id/logibButton"
 
         />
 
