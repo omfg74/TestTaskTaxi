@@ -16,10 +16,11 @@ import com.omfgdevelop.maximtesttask.MainRecyclerViewAdapter;
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.model.Departmet;
 import com.omfgdevelop.maximtesttask.model.EmploeeItem;
+import com.omfgdevelop.maximtesttask.view.interfaces.MainRecyclerViewFragmentInterface;
 
 import java.util.ArrayList;
 
-public class MainRecyclerViewFragment extends Fragment{
+public class MainRecyclerViewFragment extends AbstractFragment implements MainRecyclerViewFragmentInterface.View {
 
     RecyclerView recyclerView;
     MainRecyclerViewAdapter adapter;
@@ -49,10 +50,15 @@ ArrayList<Departmet> departmets;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-    View view = inflater.inflate(R.layout.main_list_fragment,container,false);
+      return   super.onCreateView(inflater, container, savedInstanceState);
+//    View view = inflater.inflate(R.layout.main_list_fragment,container,false);
+//
+//    return view;
+    }
 
-    return view;
+    @Override
+    protected int getLayout() {
+        return R.layout.main_list_fragment;
     }
 
     @Override

@@ -21,6 +21,8 @@ public class AuthPresenter implements AuthFragmentInterface.Presenter {
         ((Credentials) model).setLogin(view.getLogin());
         ((Credentials) model).setPassword(view.getPassword());
         model.getAuth((Credentials)model);
+
+
     }
 
 

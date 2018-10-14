@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.presenter.AuthPresenter;
+import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
 
@@ -40,6 +41,7 @@ public class AuthFragment extends AbstractFragment implements AuthFragmentInterf
             @Override
             public void onClick(View view) {
                 presenter.buttonClicked();
+                controllerPresenter.addFragment(new MainRecyclerViewFragment());
             }
         });
     }

@@ -19,6 +19,7 @@ public class MainActivityPresenter implements MainActivityInterface.Presenter,Fr
     public void getFragment() {
 
         //Переделать
+        //Не совсем корректное поведение необходимо отслеживать активный фрагмент
        view.setFragment(new AuthFragment());
     }
 }

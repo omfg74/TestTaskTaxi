@@ -27,6 +27,7 @@ MainRecyclerViewFragment fragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_fragment_place,fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

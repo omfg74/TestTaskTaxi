@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import com.omfgdevelop.maximtesttask.view.interfaces.FragmentContract;
 
 public abstract class AbstractFragment extends Fragment implements FragmentContract.View {
-    private View view;
+    protected View view;
 
 
-    private FragmentContract.Presenter controllerPresenter;
+    protected FragmentContract.Presenter controllerPresenter;
 
 
     @Nullable
