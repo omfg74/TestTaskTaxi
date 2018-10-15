@@ -4,9 +4,13 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Departmet;
 import com.omfgdevelop.maximtesttask.model.EmploeeItem;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,7 +31,12 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
+            Credentials credentials = new Credentials();
+            credentials.setLogin("test_user");
+            credentials.setPassword("test_pass");
 
+        EmployeeRequestInterface employeeRequestInterface = new EmployeeRequest();
+        employeeRequestInterface.getEmoloyees(credentials,appContext);
         assertEquals("com.omfgdevelop.maximtesttask", appContext.getPackageName());
     }
 }

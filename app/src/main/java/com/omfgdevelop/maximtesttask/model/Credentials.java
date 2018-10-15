@@ -14,7 +14,7 @@ import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
 import java.io.Serializable;
 
-public class Credentials implements Serializable, AuthFragmentInterface.Model {
+public class Credentials implements Serializable {
     private String login;
     private String password;
 
@@ -34,20 +34,5 @@ public class Credentials implements Serializable, AuthFragmentInterface.Model {
         this.password = password;
     }
 
-    @Override
-    public void getAuth(Credentials credentials,Context context) {
 
-//        Log.d("LOG", credentials.getLogin() + " "+ credentials.getPassword());
-        CredentialCheckerInterface checked = new CredentialsChecker();
-        if(checked.check(credentials, context)){
-            //сохраняем авторизацию
-            SettingsInterface settingsInterface = new Settings();
-            settingsInterface.getCredentials();
-            settingsInterface.addCredentials(credentials);
-        }else {
-            Toast.makeText(context,"Failed to save user data", Toast.LENGTH_SHORT).show();
-            //не сохраняем
-        }
-
-    }
 }

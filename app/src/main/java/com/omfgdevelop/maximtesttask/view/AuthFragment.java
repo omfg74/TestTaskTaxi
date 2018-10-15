@@ -36,7 +36,10 @@ public class AuthFragment extends AbstractFragment implements AuthFragmentInterf
         loginEditText = view.findViewById(R.id.loginEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
         loginButton = view.findViewById(R.id.logibButton);
-
+//TEST
+        loginEditText.setText("test_user");
+        passwordEditText.setText("test_pass");
+      //TEST
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
