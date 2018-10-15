@@ -16,7 +16,7 @@ public class RetrofitClient {
     private static RetrofitClient instance = null;
     private Retrofit retrofit;
     private OkHttpClient client;
-    public static final String API_URL = "http://s3.eu-central-1.amazonaws.com/sl.files/";
+    public static final String API_URL = "https://contact.taxsee.com/Contacts.svc/";
     private RetrofitInterface retrofitInterface;
 
     public RetrofitClient() {

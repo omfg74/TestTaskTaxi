@@ -1,5 +1,6 @@
 package com.omfgdevelop.maximtesttask.view.interfaces;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
@@ -16,7 +17,7 @@ public interface AuthFragmentInterface {
     }
     interface Model{
 
-        void getAuth(Credentials credentials);
+        void getAuth(Credentials credentials, Context context);
 
 
     }
