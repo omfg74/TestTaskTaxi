@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthInterface;
 import com.omfgdevelop.maximtesttask.presenter.AuthPresenter;
 import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
@@ -24,7 +23,7 @@ public  class AuthFragment extends AbstractFragment implements AuthFragmentInter
     private EditText loginEditText;
     private EditText passwordEditText;
     private Button loginButton;
-    private AuthInterface authInterface;
+
 
 
     @Override
@@ -52,27 +51,23 @@ public  class AuthFragment extends AbstractFragment implements AuthFragmentInter
     }
 
 
-
-
-
-
     @Override
     public String getLogin() {
-        return null;
+        return loginEditText.getText().toString();
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return passwordEditText.getText().toString();
     }
 
     @Override
-    public void changeFragment(Boolean bool) {
-        System.out.println("is suc "+bool);
-        if(bool) {
-            controllerPresenter.addFragment(new MainRecyclerViewFragment());
-        }else {
-            Toast.makeText(getContext()," Failed to check user data", Toast.LENGTH_SHORT).show();
-        }
+    public void changeFragment() {
+        controllerPresenter.addFragment(new MainRecyclerViewFragment());
+    }
+
+    @Override
+    public void setText(String str) {
+        Toast.makeText(getContext(),str, Toast.LENGTH_LONG).show();
     }
 }

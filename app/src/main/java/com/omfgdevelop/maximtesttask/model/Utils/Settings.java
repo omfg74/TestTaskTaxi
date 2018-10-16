@@ -16,8 +16,8 @@ public class Settings implements SettingsInterface {
    private SharedPreferences.Editor editor;
 
     @Override
-    public void getPreferences() {
-        preferences = context.getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
+    public void init() {
+        preferences = getPreferences();
         editor = preferences.edit();
     }
 

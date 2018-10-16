@@ -1,34 +1,47 @@
 package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
 
-import android.content.Context;
+import android.util.Log;
 
 import com.omfgdevelop.maximtesttask.model.AuthData;
 import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthCallBackInterface;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthRequestInterface;
+import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AuthRequestRequest implements AuthRequestInterface {
+public class AuthRequest implements AuthRequestInterface {
     AuthData authData = new AuthData();
     boolean isSuccessful;
     Credentials credentials;
-    Context context;
+    AuthCallBackInterface authCallBackInterface;
+    private MainActivityPresenter presenter;
+
+
+    public AuthRequest(Credentials credentials, AuthCallBackInterface authCallBackInterface) {
+        this.credentials = credentials;
+        this.authCallBackInterface = authCallBackInterface;
+    }
+
 
     @Override
-    public synchronized boolean getAuth(Credentials credentials, final Context context) {
-        this.credentials = credentials;
-        this.context = context;
-        final RetrofitClient retrofitClient = RetrofitClient.getInstance();
+    public void createAuthRequest() {
+        RetrofitClient retrofitClient = RetrofitClient.getInstance();
         try{
             Call<AuthData> response = retrofitClient.getRetrofitInterface().getAuthData(credentials.getLogin(),credentials.getPassword());
             response.enqueue(new Callback<AuthData>() {
                 @Override
                 public void onResponse(Call<AuthData> call, Response<AuthData> response) {
-                    handleResponse(response);
+                    if(response.isSuccessful()) {
+                        authData.setMessage(response.body().getMessage());
+                        authData.setSuccess(response.body().getSuccess());
+                        System.out.println("MESSAGE "+authData.getSuccess());
+                        authCallBackInterface.callBackCall(authData);
 
+                    }
                 }
 
                 @Override
@@ -41,28 +54,5 @@ public class AuthRequestRequest implements AuthRequestInterface {
             e.getMessage();
 
         }
-//        System.out.println("MESSAGE "+authData.getMessage());
-//       if (authData.getSuccess().equals("true")){
-//            return true;
-//       }
-        return isSuccessful;
     }
-    private void handleResponse(Response<AuthData>response){
-        if(response.isSuccessful()) {
-            authData.setMessage(response.body().getMessage());
-            authData.setSuccess(response.body().getSuccess());
-            System.out.println("MESSAGE "+authData.getMessage());
-
-               //сохранить настройки
-
-          EmployeeRequest employeeRequest = new EmployeeRequest();
-               employeeRequest.getEmoloyees(credentials,context);
-//           }
-
-//            Toast.makeText(context,""+response.body().getMessage(),Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-
 }
