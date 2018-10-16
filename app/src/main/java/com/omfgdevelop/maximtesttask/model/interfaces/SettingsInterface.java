@@ -6,7 +6,7 @@ import com.omfgdevelop.maximtesttask.model.Credentials;
 
 public interface SettingsInterface {
 
-    void getPreferences();
+    void init();
     void addCredentials(Credentials credentials);
     void delCredentials();
     Credentials getCredentials();

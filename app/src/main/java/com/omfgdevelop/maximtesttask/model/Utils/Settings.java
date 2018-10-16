@@ -2,13 +2,14 @@ package com.omfgdevelop.maximtesttask.model.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.content.SharedPreferencesCompat;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.interfaces.SettingsInterface;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Settings implements SettingsInterface {
+public class Settings  implements SettingsInterface {
    private Credentials credentials;
    private Context context;
    private static final String STORAGE_NAME = "Settings";
@@ -17,7 +18,7 @@ public class Settings implements SettingsInterface {
 
     @Override
     public void init() {
-        preferences = getPreferences();
+        preferences =
         editor = preferences.edit();
     }
 
