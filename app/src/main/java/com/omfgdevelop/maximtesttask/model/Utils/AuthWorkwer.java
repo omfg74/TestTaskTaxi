@@ -10,7 +10,7 @@ import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 public class AuthWorkwer implements  AuthFragmentInterface.Model {
     CredentialCheckerInterface checked;
     @Override
-    public void getAuth(Credentials credentials, Context context) {
+    public AuthData getAuth(Credentials credentials, Context context) {
 
         AuthRequestRequest authRequest = new AuthRequestRequest();
         Boolean a = authRequest.getAuth(credentials,context);
