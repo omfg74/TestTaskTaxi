@@ -9,19 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthInterface;
 import com.omfgdevelop.maximtesttask.presenter.AuthPresenter;
 import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
 
-public class AuthFragment extends AbstractFragment implements AuthFragmentInterface.View {
+public  class AuthFragment extends AbstractFragment implements AuthFragmentInterface.View {
 
     private AuthFragmentInterface.Presenter presenter;
     private EditText loginEditText;
     private EditText passwordEditText;
     private Button loginButton;
+    private AuthInterface authInterface;
 
 
     @Override
@@ -43,21 +46,33 @@ public class AuthFragment extends AbstractFragment implements AuthFragmentInterf
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.buttonClicked();
-                controllerPresenter.addFragment(new MainRecyclerViewFragment());
-            }
+              presenter.buttonClicked();
+              }
         });
     }
 
 
+
+
+
+
     @Override
     public String getLogin() {
-        return loginEditText.getText().toString();
-
+        return null;
     }
 
     @Override
     public String getPassword() {
-        return passwordEditText.getText().toString();
+        return null;
+    }
+
+    @Override
+    public void changeFragment(Boolean bool) {
+        System.out.println("is suc "+bool);
+        if(bool) {
+            controllerPresenter.addFragment(new MainRecyclerViewFragment());
+        }else {
+            Toast.makeText(getContext()," Failed to check user data", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -48,4 +48,12 @@ public class Settings implements SettingsInterface {
         credentials.setPassword(preferences.getString("Password",null));
         return credentials;
     }
+
+    @Override
+    public boolean checkIfExists() {
+        if(preferences.contains("Login")){
+            return true;
+        }
+        return false;
+    }
 }

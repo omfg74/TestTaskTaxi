@@ -1,10 +1,10 @@
 
-package com.omfgdevelop.maximtesttask.model;
+package com.omfgdevelop.maximtesttask.model.Emplee;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Employee {
+public class Employee_ {
 
     @SerializedName("ID")
     @Expose
@@ -15,12 +15,12 @@ public class Employee {
     @SerializedName("Title")
     @Expose
     private String title;
-    @SerializedName("Email")
-    @Expose
-    private String email;
     @SerializedName("Phone")
     @Expose
     private String phone;
+    @SerializedName("Email")
+    @Expose
+    private String email;
 
     public String getID() {
         return iD;
@@ -46,20 +46,20 @@ public class Employee {
         this.title = title;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

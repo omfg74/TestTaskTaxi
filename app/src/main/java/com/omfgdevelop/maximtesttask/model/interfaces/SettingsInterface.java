@@ -10,4 +10,5 @@ public interface SettingsInterface {
     void addCredentials(Credentials credentials);
     void delCredentials();
     Credentials getCredentials();
+    boolean checkIfExists();
 }

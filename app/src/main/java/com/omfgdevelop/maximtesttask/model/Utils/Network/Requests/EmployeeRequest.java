@@ -4,10 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Emplee.Department;
 import com.omfgdevelop.maximtesttask.model.Emplee.Department_;
 import com.omfgdevelop.maximtesttask.model.Emplee.Department__;
-import com.omfgdevelop.maximtesttask.model.Emplee.Employee;
+import com.omfgdevelop.maximtesttask.model.Emplee.*;
 import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;

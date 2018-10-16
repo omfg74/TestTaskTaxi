@@ -12,5 +12,6 @@ public interface FragmentContract {
     }
     interface Model{
 
+
     }
 }
