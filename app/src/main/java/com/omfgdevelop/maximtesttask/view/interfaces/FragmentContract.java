@@ -9,9 +9,6 @@ public interface FragmentContract {
 
     interface Presenter{
         void addFragment(AbstractFragment fragment);
-    }
-    interface Model{
-
 
     }
 }

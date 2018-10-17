@@ -5,8 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-public class EmoleeData {
+public class SubDepartment {
 
     @SerializedName("ID")
     @Expose
@@ -14,9 +13,9 @@ public class EmoleeData {
     @SerializedName("Name")
     @Expose
     private String name;
-    @SerializedName("Departments")
+    @SerializedName("Employees")
     @Expose
-    private List<Department> departments = null;
+    private List<Employee__> employees = null;
 
     public String getID() {
         return iD;
@@ -34,12 +33,12 @@ public class EmoleeData {
         this.name = name;
     }
 
-    public List<Department> getDepartments() {
-        return departments;
+    public List<Employee__> getEmployees() {
+        return employees;
     }
 
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
+    public void setEmployees(List<Employee__> employees) {
+        this.employees = employees;
     }
 
 }

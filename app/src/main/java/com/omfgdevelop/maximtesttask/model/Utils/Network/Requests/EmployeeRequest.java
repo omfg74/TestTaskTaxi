@@ -1,15 +1,11 @@
 package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Emplee.Department_;
-import com.omfgdevelop.maximtesttask.model.Emplee.Department__;
 import com.omfgdevelop.maximtesttask.model.Emplee.*;
 import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,83 +16,61 @@ import retrofit2.Response;
 
 public class EmployeeRequest implements EmployeeRequestInterface {
 
-    List<EmployeeData> employeeDataList = new ArrayList<>();
+   EmployeeData employeeData;
+   RecyclerViewCallBackInterface callBack;
+   Credentials credentials;
+
+    public EmployeeRequest(Credentials credentials,EmployeeData employeeData, RecyclerViewCallBackInterface callBack) {
+        this.employeeData = employeeData;
+        this.callBack = callBack;
+        this.credentials = credentials;
+    }
+
     @Override
-    public void getEmoloyees(Credentials credentials, Context context) {
-
+    public void getEmoloyees() {
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        try{
-            final Call<List<EmployeeData>> request = retrofitClient
+        try {
+            final Call<EmployeeData> request = retrofitClient
                     .getRetrofitInterface()
-                    .getEmployeeData(credentials.getLogin(),credentials.getPassword());
-            request.enqueue(new Callback<List<EmployeeData>>() {
+                    .getEmployeeData(credentials.getLogin(), credentials.getPassword());
+            request.enqueue(new Callback<EmployeeData>() {
                 @Override
-                public void onResponse(Call<List<EmployeeData>> call, Response<List<EmployeeData>> response) {
-                    if(response.isSuccessful()){
-
-                        for (int i = 0; i <response.body().size() ; i++) {
-                            EmployeeData employeeData = new EmployeeData();
-                            employeeData.setDepartments(response.body().get(i).getDepartments());
-                            employeeData.setID(response.body().get(i).getID());
-                            employeeData.setName(response.body().get(i).getName());
-                            List<Department>departments = new ArrayList<>();
-                            System.out.println(("JFIO GIOSRGFJHSEIOFR JESIOFJ SREIOFSEJF ISEOJF SREIOFJSEIO:F JSEIO:F JSEIOF:SEJFIO:E JFIO :SEJF SIE :FJ ESIOFJSEIO : FJSEIO:FJ SEIO:F "+response.body().get(i).getID()));
-                            Log.d("JSON","response.body().get(i).getName() "+response.body().get(i).getName());
-//                            Log.d("JSON",);
-//                            Log.d("JSON",);
-                            for (int j = 0; j <response.body().get(j).getDepartments().size() ; j++) {
-                                Department department = new Department();
-                                department.setDepartments(response.body().get(i).getDepartments().get(j).getDepartments());
-                                department.setEmployees(response.body().get(i).getDepartments().get(j).getEmployees());
-                                department.setID(response.body().get(j).getID());
-                                department.setName(response.body().get(j).getName());
-                                Log.d("JSON","response.body().get(j).getID() "+response.body().get(j).getID());
-                                Log.d("JSON","response.body().get(j).getName() "+response.body().get(j).getName());
-//                                Log.d("JSON",);
-//                                Log.d("JSON",);
-                                for (int k = 0; k <response.body().get(i).getDepartments().get(j).getDepartments().size() ; k++) {
-                                    Department_ department_ = new Department_();
-                                    department_.setDepartments(response.body().get(i).getDepartments().get(i).getDepartments().get(k).getDepartments());
-                                    department_.setEmployees(response.body().get(i).getDepartments().get(i).getDepartments().get(k).getEmployees());
-                                    department_.setID(response.body().get(i).getDepartments().get(i).getDepartments().get(k).getID());
-                                    department_.setName(response.body().get(i).getDepartments().get(i).getDepartments().get(k).getName());
-                                    Log.d("JSON"," response.body().get(i).getDepartments().get(i).getDepartments().get(k).getID() "+response.body().get(i).getDepartments().get(i).getDepartments().get(k).getID());
-                                Log.d("JSON"," response.body().get(i).getDepartments().get(i).getDepartments().get(k).getName() " +response.body().get(i).getDepartments().get(i).getDepartments().get(k).getName());
-                                    for (int l = 0; l <response.body().get(i).getDepartments().get(j).getDepartments().get(k).getDepartments().size() ; l++) {
-                                        Department__ department__ = new Department__();
-                                        department__.setEmployees(response.body().get(i).getDepartments().get(j).getDepartments().get(k).getDepartments().get(l).getEmployees());
-                                        department__.setID(response.body().get(i).getDepartments().get(j).getDepartments().get(k).getDepartments().get(l).getID());
-                                        department__.setName(response.body().get(i).getDepartments().get(j).getDepartments().get(k).getDepartments().get(l).getName());
-                                        Log.d("JSON","last getID() "+response.body().get(i).getDepartments().get(j).getDepartments().get(k).getDepartments().get(l).getID());
-                                        Log.d("JSON","last getName() "+response.body().get(i).getDepartments().get(j).getDepartments().get(k).getDepartments().get(l).getName());
-                                    }
-                                }
-                                }
-                        }
-                    }else {
-
-                    }
+                public void onResponse(Call<EmployeeData> call, Response<EmployeeData> response) {
+                   parceJson(response,callBack);
                 }
 
                 @Override
-                public void onFailure(Call<List<EmployeeData>> call, Throwable t) {
-//*
-                    //
-//                    Employee employee = new Employee();
-//                    employee.setName(response.body().get(i).getDepartments().get(j).getEmployees().get(k).getName());
-//                    employee.setEmail(response.body().get(i).getDepartments().get(j).getEmployees().get(k).getEmail());
-//                    employee.setID(response.body().get(i).getDepartments().get(j).getEmployees().get(k).getID());
-//                    employee.setPhone(response.body().get(i).getDepartments().get(j).getEmployees().get(k).getPhone());
-//                    employee.setTitle(response.body().get(i).getDepartments().get(j).getEmployees().get(k).getTitle());
-//                    Log.d("JSON",);
-//                    Log.d("JSON",);
-//                    Log.d("JSON",);
-//                    Log.d("JSON",);
+                public void onFailure(Call<EmployeeData> call, Throwable t) {
+
+                    System.out.println(t.getMessage());
                 }
             });
+
 
         }catch (Exception e){e.printStackTrace();}
 
 
+
+    }
+    void parceJson(Response<EmployeeData> response, RecyclerViewCallBackInterface callBack){
+        if(response.isSuccessful()) {
+            List<Office> officeList = new ArrayList<>();
+
+            for (int i = 0; i < response.body().getOffices().size(); i++) {
+                Office office = new Office();
+                office.setDepartments(response.body().getOffices().get(i).getDepartments());
+                office.setEmployees(response.body().getOffices().get(i).getEmployees());
+                office.setID(response.body().getOffices().get(i).getID());
+                office.setName(response.body().getOffices().get(i).getName());
+                officeList.add(office);
+            }
+            employeeData.setName(response.body().getName());
+            employeeData.setID(response.body().getID());
+            employeeData.setOffices(officeList);
+            callBack.callBack(employeeData);
+        }else {
+
+        }
     }
 }
+

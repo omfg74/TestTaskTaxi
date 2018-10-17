@@ -5,7 +5,8 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Department__ {
+
+public class Office {
 
     @SerializedName("ID")
     @Expose
@@ -15,7 +16,10 @@ public class Department__ {
     private String name;
     @SerializedName("Employees")
     @Expose
-    private List<Employee__> employees = null;
+    private List<Employee> employees = null;
+    @SerializedName("Departments")
+    @Expose
+    private List<Department> departments = null;
 
     public String getID() {
         return iD;
@@ -33,12 +37,20 @@ public class Department__ {
         this.name = name;
     }
 
-    public List<Employee__> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee__> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
     }
 
 }

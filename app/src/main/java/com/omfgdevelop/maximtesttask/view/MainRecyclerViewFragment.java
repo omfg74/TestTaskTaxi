@@ -1,6 +1,8 @@
 package com.omfgdevelop.maximtesttask.view;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,35 +14,31 @@ import android.view.ViewGroup;
 
 import com.omfgdevelop.maximtesttask.MainRecyclerViewAdapter;
 import com.omfgdevelop.maximtesttask.R;
+import com.omfgdevelop.maximtesttask.model.Credentials;
+import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
+import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
 import com.omfgdevelop.maximtesttask.view.interfaces.MainRecyclerViewFragmentInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainRecyclerViewFragment extends AbstractFragment implements MainRecyclerViewFragmentInterface.View {
+public class MainRecyclerViewFragment extends AbstractFragment implements MainRecyclerViewFragmentInterface.View, RecyclerViewCallBackInterface {
 
     RecyclerView recyclerView;
     MainRecyclerViewAdapter adapter;
-ArrayList<Departmet> departmets;
+    EmployeeData employeeData;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        departmets = new ArrayList<>();
-        for (int i = 0; i <5 ; i++) {
-            ArrayList<EmploeeItem> emploeeItems = new ArrayList<>();
-            Departmet departmet = new Departmet();
-            departmet.setName("Name "+" "+i+1);
-            departmets.add(departmet);
-            for (int j = 0; j <10 ; j++) {
-                EmploeeItem emploeeItem = new EmploeeItem();
-                emploeeItem.setName("Emploee "+i+ " "+j+1);
-                emploeeItems.add(emploeeItem);
-
-
-
-            }
-            departmet.setEmploeeItems(emploeeItems);
-        }
-
+        employeeData = new EmployeeData();
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        Credentials credentials = new Credentials();
+        credentials.setLogin(sharedPreferences.getString("Login","lgn"));
+        credentials.setPassword(sharedPreferences.getString("Password","pwd"));
+        EmployeeRequestInterface employeeRequestInterface = new EmployeeRequest(credentials,employeeData,this);
+        employeeRequestInterface.getEmoloyees();
     }
 
     @Nullable
@@ -60,12 +58,31 @@ ArrayList<Departmet> departmets;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.mainRecyclerView);
-        adapter = new MainRecyclerViewAdapter(departmets);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+
 
     }
 
+    @Override
+    public void callBack(EmployeeData employeeData) {
+//        recyclerView = view.findViewById(R.id.mainRecyclerView);
+//        adapter = new MainRecyclerViewAdapter(employeeData);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setHasFixedSize(true);
+
+        System.out.println(employeeData.getOffices());
+        for (int i = 0; i <employeeData.getOffices().size() ; i++) {
+            System.out.println(employeeData.getOffices().get(i).getName());
+            if (employeeData.getOffices().get(i).getDepartments() != null) {
+                for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size(); j++) {
+                    System.out.println(employeeData.getOffices().get(i).getDepartments().get(j).getName());
+                    if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments()!=null){
+                        for (int k = 0; k <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size() ; k++) {
+                            System.out.println(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

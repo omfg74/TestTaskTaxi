@@ -12,18 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.omfgdevelop.maximtesttask.model.Emplee.Department;
-import com.omfgdevelop.maximtesttask.model.Emplee.Department_;
-import com.omfgdevelop.maximtesttask.model.Emplee.Department__;
+import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.MainViewHolder> {
 
-    private ArrayList<Department> departmets;
+    private EmployeeData emoleeDataArrayList;
 
-    public MainRecyclerViewAdapter(ArrayList<Department> departmets) {
-        this.departmets = departmets;
+    public MainRecyclerViewAdapter(EmployeeData emoleeDataArrayList) {
+        this.emoleeDataArrayList = emoleeDataArrayList;
     }
 
     @NonNull
@@ -36,12 +35,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
 
-        Department departmet = departmets.get(position);
-        holder.departmentTextView.setText(departmet.getName());
-        Log.d("recycler ",departmets.get(position).getName());
+        EmployeeData emoleeData = emoleeDataArrayList;
+        holder.departmentTextView.setText(emoleeData.getName());
+        Log.d("recycler ", emoleeDataArrayList.getName());
 
         int emploeeTextView = holder.linearLayout.getChildCount();
-        int numberOfEmplee = departmet.getDepartments().size();//размеры подразделений
+        int numberOfEmplee = emoleeData.getOffices().size();//размеры подразделений
         if(numberOfEmplee<emploeeTextView){
             for (int i = numberOfEmplee; i<emploeeTextView; i++) {
                 TextView textView = (TextView) holder.linearLayout.getChildAt(i);
@@ -51,15 +50,16 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         }
         for (int j = 0; j < numberOfEmplee; j++) {
             TextView textView = (TextView) holder.linearLayout.getChildAt(j);
-            textView.setText(departmet.getDepartments().get(j).getName());//размеры подразделений
+            textView.setText(emoleeData.getOffices().get(j).getName());//размеры подразделений
 
         }
     }
 
     @Override
     public int getItemCount() {
-        return departmets.size();
-    }
+        System.out.println(emoleeDataArrayList.getOffices().size());
+        return emoleeDataArrayList.getOffices().size();
+        }
 
     class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -74,11 +74,11 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             linearLayout  =itemView.findViewById(R.id.emploee_item);
             linearLayout.setVisibility(View.GONE);
             int emploees = 0;
-            for (int i = 0; i < departmets.size(); i++) {
-                int t = departmets.get(i).getEmploeeItems().size();
-                if (t>emploees){
-                    emploees=t;
-                }
+            for (int i = 0; i < emoleeDataArrayList.getOffices().size(); i++) {
+//                int t = emoleeDataArrayList.getDepartments().get(i).getDepartments().size();
+//                if (t>emploees){
+//                    emploees=t;
+//                }
 
             }
             for (int i = 0; i < emploees ; i++) {

@@ -1,5 +1,5 @@
 
-package com.omfgdevelop.maximtesttask.model;
+package com.omfgdevelop.maximtesttask.model.Emplee;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

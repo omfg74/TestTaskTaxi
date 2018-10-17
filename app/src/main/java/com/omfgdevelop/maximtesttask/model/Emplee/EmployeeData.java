@@ -15,7 +15,7 @@ public class EmployeeData {
     private String name;
     @SerializedName("Departments")
     @Expose
-    private List<Department> departments = null;
+    private List<Office> offices = null;
 
     public String getID() {
         return iD;
@@ -33,12 +33,12 @@ public class EmployeeData {
         this.name = name;
     }
 
-    public List<Department> getDepartments() {
-        return departments;
+    public List<Office> getOffices() {
+        return offices;
     }
 
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
+    public void setOffices(List<Office> departments) {
+        this.offices = departments;
     }
 
 }

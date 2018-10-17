@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
+import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Utils.Settings;
 import com.omfgdevelop.maximtesttask.presenter.AuthPresenter;
 import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;

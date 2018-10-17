@@ -4,7 +4,6 @@ package com.omfgdevelop.maximtesttask.model.Emplee;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.omfgdevelop.maximtesttask.model.Employee;
 
 public class Department {
 
@@ -16,10 +15,10 @@ public class Department {
     private String name;
     @SerializedName("Employees")
     @Expose
-    private List<Employee> employees = null;
+    private List<Employee_> employees = null;
     @SerializedName("Departments")
     @Expose
-    private List<Department_> departments = null;
+    private List<SubDepartment> departments = null;
 
     public String getID() {
         return iD;
@@ -37,19 +36,19 @@ public class Department {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
+    public List<Employee_> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(List<Employee_> employees) {
         this.employees = employees;
     }
 
-    public List<Department_> getDepartments() {
+    public List<SubDepartment> getSubDepartments() {
         return departments;
     }
 
-    public void setDepartments(List<Department_> departments) {
+    public void setSubDepartments(List<SubDepartment> departments) {
         this.departments = departments;
     }
 

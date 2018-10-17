@@ -16,5 +16,5 @@ public interface RetrofitInterface {
     Call<AuthData> getAuthData(@Query("login")String login, @Query("password")String password);
 //    void  getAuthData(@Query("login")String login, @Query("password")String password, Callback<AuthData> callback);
     @GET("GetAll?")
-    Call<List<EmployeeData>> getEmployeeData(@Query("login")String login, @Query("password")String password);
+    Call<EmployeeData> getEmployeeData(@Query("login")String login, @Query("password")String password);
 }
