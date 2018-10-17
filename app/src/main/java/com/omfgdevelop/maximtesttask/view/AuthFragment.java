@@ -37,7 +37,7 @@ public  class AuthFragment extends AbstractFragment implements AuthFragmentInter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AuthFragmentInterface.Model settings = new Settings(initPrefs());
+        AuthFragmentInterface.Model.Settings settings = new Settings(initPrefs());
         presenter = new AuthPresenter(this, settings);
         loginEditText = view.findViewById(R.id.loginEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);

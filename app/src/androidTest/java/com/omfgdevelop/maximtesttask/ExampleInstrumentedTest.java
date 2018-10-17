@@ -5,17 +5,11 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Departmet;
-import com.omfgdevelop.maximtesttask.model.EmploeeItem;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 

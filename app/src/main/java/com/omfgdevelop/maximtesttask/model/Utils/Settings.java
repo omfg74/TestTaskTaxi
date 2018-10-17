@@ -11,7 +11,7 @@ import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Settings  implements AuthFragmentInterface.Model {
+public class Settings  implements AuthFragmentInterface.Model.Settings {
    private Credentials credentials;
    private Context context;
    private static final String STORAGE_NAME = "Settings";

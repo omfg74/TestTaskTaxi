@@ -3,6 +3,7 @@ package com.omfgdevelop.maximtesttask;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.omfgdevelop.maximtesttask.model.Departmet;
+import com.omfgdevelop.maximtesttask.model.Emplee.Department;
+import com.omfgdevelop.maximtesttask.model.Emplee.Department_;
+import com.omfgdevelop.maximtesttask.model.Emplee.Department__;
 
 import java.util.ArrayList;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.MainViewHolder> {
 
-    private ArrayList<Departmet> departmets;
+    private ArrayList<Department> departmets;
 
-    public MainRecyclerViewAdapter(ArrayList<Departmet> departmets) {
+    public MainRecyclerViewAdapter(ArrayList<Department> departmets) {
         this.departmets = departmets;
     }
 
@@ -33,11 +36,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
 
-        Departmet departmet = departmets.get(position);
+        Department departmet = departmets.get(position);
         holder.departmentTextView.setText(departmet.getName());
+        Log.d("recycler ",departmets.get(position).getName());
 
         int emploeeTextView = holder.linearLayout.getChildCount();
-        int numberOfEmplee = departmet.getEmploeeItems().size();
+        int numberOfEmplee = departmet.getDepartments().size();//размеры подразделений
         if(numberOfEmplee<emploeeTextView){
             for (int i = numberOfEmplee; i<emploeeTextView; i++) {
                 TextView textView = (TextView) holder.linearLayout.getChildAt(i);
@@ -47,7 +51,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         }
         for (int j = 0; j < numberOfEmplee; j++) {
             TextView textView = (TextView) holder.linearLayout.getChildAt(j);
-            textView.setText(departmet.getEmploeeItems().get(j).getName());
+            textView.setText(departmet.getDepartments().get(j).getName());//размеры подразделений
 
         }
     }

@@ -23,12 +23,10 @@ import retrofit2.Response;
 
 public class AuthPresenter implements AuthFragmentInterface.Presenter,AuthCallBackInterface {
     private AuthFragmentInterface.View view;
-    private AuthFragmentInterface.Model model;
+    private AuthFragmentInterface.Model.Settings model;
 
     private Credentials credentials;
-    private Settings settings;
-    private SharedPreferences preferences;
-    public AuthPresenter(AuthFragmentInterface.View view, AuthFragmentInterface.Model model) {
+    public AuthPresenter(AuthFragmentInterface.View view, AuthFragmentInterface.Model.Settings model) {
         this.view = view;
         this.model = model;
 
@@ -56,7 +54,7 @@ public class AuthPresenter implements AuthFragmentInterface.Presenter,AuthCallBa
     }
 
     @Override
-    public void callBackCall(AuthData authData) {//можно возвращать учетные данные и здесь
+    public void callBackCall(AuthData authData) {
         if (authData.getSuccess() == true) {
             if(!model.checkIfExists())
             model.initEditor();

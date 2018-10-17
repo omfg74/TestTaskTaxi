@@ -21,10 +21,12 @@ public interface AuthFragmentInterface {
 
     }
     interface Model{
+        interface Settings{
 void initEditor();
 void  addCredentials(Credentials credentials);
         void delCredentials();
         Credentials getCredentials();
        boolean checkIfExists();
     }
+}
 }
