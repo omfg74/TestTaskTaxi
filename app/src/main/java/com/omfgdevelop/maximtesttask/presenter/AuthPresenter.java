@@ -1,5 +1,6 @@
 package com.omfgdevelop.maximtesttask.presenter;
 
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -26,37 +27,44 @@ public class AuthPresenter implements AuthFragmentInterface.Presenter,AuthCallBa
 
     private Credentials credentials;
     private Settings settings;
-    public AuthPresenter(AuthFragmentInterface.View view) {
+    private SharedPreferences preferences;
+    public AuthPresenter(AuthFragmentInterface.View view, AuthFragmentInterface.Model model) {
         this.view = view;
+        this.model = model;
 
     }
 
     @Override
     public void buttonClicked() {
         //Уточнить этот момент
-       settings = new Settings();
+
         credentials = new Credentials();
-        settings.getPreferences();
-        if(!settings.checkIfExists()){
+        if(!model.checkIfExists()){
             view.setText("No data");
         credentials.setLogin(view.getLogin());
         credentials.setPassword(view.getPassword());
         AuthRequestInterface authRequest = new AuthRequest(credentials, this);
                 authRequest.createAuthRequest();
     }else {
+//            if(credentials.getLogin().equals(model.getCredentials().getLogin())||credentials.getPassword().equals(model.getCredentials().getPassword())){
             view.setText("Welcome Back");//add string value
             view.changeFragment();
+//        }else {
+//                view.setText("Wrong login or password");
+//            }
         }
     }
 
     @Override
     public void callBackCall(AuthData authData) {//можно возвращать учетные данные и здесь
         if (authData.getSuccess() == true) {
-            settings.getPreferences();
-            settings.addCredentials(credentials);
+            if(!model.checkIfExists())
+            model.initEditor();
+            model.addCredentials(credentials);
+        }
             view.setText("Saved");
             view.changeFragment();//Смена фрагмента
         }
     }
-}
+
 

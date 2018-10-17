@@ -1,5 +1,7 @@
 package com.omfgdevelop.maximtesttask.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
+import com.omfgdevelop.maximtesttask.model.Utils.Settings;
 import com.omfgdevelop.maximtesttask.presenter.AuthPresenter;
 import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
@@ -34,7 +37,8 @@ public  class AuthFragment extends AbstractFragment implements AuthFragmentInter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new AuthPresenter(this);
+        AuthFragmentInterface.Model settings = new Settings(initPrefs());
+        presenter = new AuthPresenter(this, settings);
         loginEditText = view.findViewById(R.id.loginEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
         loginButton = view.findViewById(R.id.logibButton);
@@ -42,6 +46,10 @@ public  class AuthFragment extends AbstractFragment implements AuthFragmentInter
         loginEditText.setText("test_user");
         passwordEditText.setText("test_pass");
       //TEST
+        initPrefs();
+        if(settings.checkIfExists()){
+            presenter.buttonClicked();
+        }
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,5 +77,12 @@ public  class AuthFragment extends AbstractFragment implements AuthFragmentInter
     @Override
     public void setText(String str) {
         Toast.makeText(getContext(),str, Toast.LENGTH_LONG).show();
+    }
+
+
+    public SharedPreferences initPrefs() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+       return sharedPreferences;
+
     }
 }

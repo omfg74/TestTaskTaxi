@@ -1,6 +1,7 @@
 package com.omfgdevelop.maximtesttask.view.interfaces;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
@@ -20,11 +21,10 @@ public interface AuthFragmentInterface {
 
     }
     interface Model{
-
-   boolean authentficate();
-
-
-
-
+void initEditor();
+void  addCredentials(Credentials credentials);
+        void delCredentials();
+        Credentials getCredentials();
+       boolean checkIfExists();
     }
 }
