@@ -48,9 +48,7 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       return   super.onCreateView(inflater, container, savedInstanceState);
-//    View view = inflater.inflate(R.layout.main_list_fragment,container,false);
-//
-//    return view;
+
     }
 
     @Override
@@ -75,40 +73,62 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
 //        recyclerView.setAdapter(adapter);
 //        recyclerView.setHasFixedSize(true);
 
-        System.out.println(employeeData.getOffices());
-        for (int i = 0; i <employeeData.getOffices().size() ; i++) {
-            System.out.println(employeeData.getOffices().get(i).getName());
-            if (employeeData.getOffices().get(i).getDepartments() != null) {
-                for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size(); j++) {
-                    System.out.println(employeeData.getOffices().get(i).getDepartments().get(j).getName());
-                    if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments()!=null){
-                        for (int k = 0; k <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size() ; k++) {
-                            System.out.println(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
-                        }
-                    }
-                }
-            }
-        }
-
-        //Tree view
-
         TreeNode root = TreeNode.root();
-        //24 29
-        TreeNode mainNode = new TreeNode(employeeData.getName());
+
+        TreeNode allNode = new TreeNode(employeeData.getName());
+
         List<TreeNode> officesList = new ArrayList<>();
-        List<TreeNode> departmentsList = new ArrayList<>();
+
+
         for (int i = 0; i <employeeData.getOffices().size() ; i++) {
             TreeNode office = new TreeNode(employeeData.getOffices().get(i).getName());
-            officesList.add(office);
+            List<TreeNode> departmentsList = new ArrayList<>();
+
             if (employeeData.getOffices().get(i).getDepartments()!=null){
             for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size() ; j++) {
                 TreeNode department = new TreeNode(employeeData.getOffices().get(i).getDepartments().get(j).getName());
-            }}
+                List<TreeNode> subDepartmentsList = new ArrayList<>();
+                if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments()!=null){
+                    for (int k = 0; k <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size() ; k++) {
+                        TreeNode subDepartment = new TreeNode(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
+
+                        List<TreeNode>subEmployeeList = new ArrayList<>();
+                        if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees()!=null){
+                            //add employee tree node
+                            for (int l = 0; l <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().size(); l++) {
+
+                                TreeNode subEmployees = new TreeNode(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getName());
+                                subEmployeeList.add(subEmployees);
+                            }
+                        }else {
+
+                        }
+                        subDepartmentsList.add(subDepartment);
+                        subDepartment.addChildren(subEmployeeList);
+                    }
+                }else{
+
+                }
+                departmentsList.add(department);
+                department.addChildren(subDepartmentsList);
+            }
+
+            }else if(employeeData.getOffices().get(i).getEmployees()!=null){
+                //add employee treenode offices
+                for (int j = 0; j <employeeData.getOffices().get(i).getEmployees().size() ; j++) {
+                    TreeNode officeEmployee = new TreeNode(employeeData.getOffices().get(i).getEmployees().get(j).getName());
+                    departmentsList.add(officeEmployee);
+                }
+            }
+            office.addChildren(departmentsList);
+            officesList.add(office);
         }
 
 //        mainNode.addChild(officesList.get(i).)
-        mainNode.addChildren(officesList);
-        root.addChild(mainNode);
+
+
+        allNode.addChildren(officesList);
+        root.addChild(allNode);
         AndroidTreeView treeView = new AndroidTreeView(getContext(), root);
         conteiner.addView(treeView.getView());
 
