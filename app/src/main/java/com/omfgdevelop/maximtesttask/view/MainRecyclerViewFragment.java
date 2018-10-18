@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.omfgdevelop.maximtesttask.MainRecyclerViewAdapter;
 import com.omfgdevelop.maximtesttask.R;
@@ -19,16 +20,18 @@ import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
-import com.omfgdevelop.maximtesttask.view.interfaces.MainRecyclerViewFragmentInterface;
+import com.unnamed.b.atv.model.TreeNode;
+import com.unnamed.b.atv.view.AndroidTreeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainRecyclerViewFragment extends AbstractFragment implements MainRecyclerViewFragmentInterface.View, RecyclerViewCallBackInterface {
+public class MainRecyclerViewFragment extends AbstractFragment implements RecyclerViewCallBackInterface {
 
     RecyclerView recyclerView;
     MainRecyclerViewAdapter adapter;
     EmployeeData employeeData;
+    FrameLayout conteiner;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +62,13 @@ public class MainRecyclerViewFragment extends AbstractFragment implements MainRe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        conteiner = (FrameLayout)view.findViewById(R.id.containerView);
 
     }
 
     @Override
     public void callBack(EmployeeData employeeData) {
+
 //        recyclerView = view.findViewById(R.id.mainRecyclerView);
 //        adapter = new MainRecyclerViewAdapter(employeeData);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -84,5 +89,29 @@ public class MainRecyclerViewFragment extends AbstractFragment implements MainRe
                 }
             }
         }
+
+        //Tree view
+
+        TreeNode root = TreeNode.root();
+        //24 29
+        TreeNode mainNode = new TreeNode(employeeData.getName());
+        List<TreeNode> officesList = new ArrayList<>();
+        List<TreeNode> departmentsList = new ArrayList<>();
+        for (int i = 0; i <employeeData.getOffices().size() ; i++) {
+            TreeNode office = new TreeNode(employeeData.getOffices().get(i).getName());
+            officesList.add(office);
+            if (employeeData.getOffices().get(i).getDepartments()!=null){
+            for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size() ; j++) {
+                TreeNode department = new TreeNode(employeeData.getOffices().get(i).getDepartments().get(j).getName());
+            }}
+        }
+
+//        mainNode.addChild(officesList.get(i).)
+        mainNode.addChildren(officesList);
+        root.addChild(mainNode);
+        AndroidTreeView treeView = new AndroidTreeView(getContext(), root);
+        conteiner.addView(treeView.getView());
+
+
     }
 }
