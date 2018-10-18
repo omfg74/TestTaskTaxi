@@ -6,17 +6,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.omfgdevelop.maximtesttask.MainRecyclerViewAdapter;
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.model.Credentials;
+import com.omfgdevelop.maximtesttask.model.Emplee.Department;
+import com.omfgdevelop.maximtesttask.model.Emplee.Employee;
 import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
+import com.omfgdevelop.maximtesttask.model.Emplee.Employee_;
+import com.omfgdevelop.maximtesttask.model.Emplee.Office;
+import com.omfgdevelop.maximtesttask.model.Emplee.SubDepartment;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
@@ -29,7 +32,6 @@ import java.util.List;
 public class MainRecyclerViewFragment extends AbstractFragment implements RecyclerViewCallBackInterface {
 
     RecyclerView recyclerView;
-    MainRecyclerViewAdapter adapter;
     EmployeeData employeeData;
     FrameLayout conteiner;
     @Override
@@ -67,12 +69,6 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
     @Override
     public void callBack(EmployeeData employeeData) {
 
-//        recyclerView = view.findViewById(R.id.mainRecyclerView);
-//        adapter = new MainRecyclerViewAdapter(employeeData);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setHasFixedSize(true);
-
         TreeNode root = TreeNode.root();
 
         TreeNode allNode = new TreeNode(employeeData.getName());
@@ -81,16 +77,29 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
 
 
         for (int i = 0; i <employeeData.getOffices().size() ; i++) {
-            TreeNode office = new TreeNode(employeeData.getOffices().get(i).getName());
+            Office officeObj = new Office();
+            officeObj.setName(employeeData.getOffices().get(i).getName());
+            officeObj.setID(employeeData.getOffices().get(i).getID());
+            TreeNode office = new TreeNode(officeObj).setViewHolder(new OfficeViewHolder(getContext()));
             List<TreeNode> departmentsList = new ArrayList<>();
-
             if (employeeData.getOffices().get(i).getDepartments()!=null){
             for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size() ; j++) {
-                TreeNode department = new TreeNode(employeeData.getOffices().get(i).getDepartments().get(j).getName());
+                Department departmentObj = new Department();
+                departmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getName());
+                departmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getID());
+                TreeNode department = new TreeNode(departmentObj).setViewHolder(new DepartmentViewHolder(getContext()));
+                if(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees()!=null){
+                Employee employee_ = new Employee();
+                TreeNode employeeTreeNode = new TreeNode(employee_).setViewHolder(new EmployeeViewHolder(getContext()));
+                departmentsList.add(employeeTreeNode);
+                }
                 List<TreeNode> subDepartmentsList = new ArrayList<>();
                 if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments()!=null){
                     for (int k = 0; k <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size() ; k++) {
-                        TreeNode subDepartment = new TreeNode(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
+                        SubDepartment subDepartmentObj = new SubDepartment();
+                        subDepartmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
+                        subDepartmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getID());
+                        TreeNode subDepartment = new TreeNode(subDepartmentObj).setViewHolder(new SubDepartmentViewHolder(getContext()));
 
                         List<TreeNode>subEmployeeList = new ArrayList<>();
                         if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees()!=null){
@@ -116,6 +125,7 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
             }else if(employeeData.getOffices().get(i).getEmployees()!=null){
                 //add employee treenode offices
                 for (int j = 0; j <employeeData.getOffices().get(i).getEmployees().size() ; j++) {
+                    Employee employee = new Employee();
                     TreeNode officeEmployee = new TreeNode(employeeData.getOffices().get(i).getEmployees().get(j).getName());
                     departmentsList.add(officeEmployee);
                 }
