@@ -3,6 +3,7 @@ package com.omfgdevelop.maximtesttask.model.Emplee;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
 
 public class Employee_ {
 

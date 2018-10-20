@@ -1,11 +1,12 @@
 
 package com.omfgdevelop.maximtesttask.model.Emplee;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EmployeeData {
+public class EmployeeData  {
 
     @SerializedName("ID")
     @Expose

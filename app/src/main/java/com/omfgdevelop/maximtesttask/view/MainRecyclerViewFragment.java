@@ -1,6 +1,7 @@
 package com.omfgdevelop.maximtesttask.view;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,40 +11,53 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
+import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
 import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Emplee.Department;
 import com.omfgdevelop.maximtesttask.model.Emplee.Employee;
 import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Emplee.Employee_;
+import com.omfgdevelop.maximtesttask.model.Emplee.Employee__;
 import com.omfgdevelop.maximtesttask.model.Emplee.Office;
 import com.omfgdevelop.maximtesttask.model.Emplee.SubDepartment;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
+import com.omfgdevelop.maximtesttask.presenter.TreeViewFragmentPresenter;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.DepartmentViewHolder;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.EmployeeDaatViewHolder;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.EmployeeViewHolder;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.Employee_ViewHolder;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.Employee__ViewHolder;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.OfficeViewHolder;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.RootViewHolder;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainRecyclerViewFragment extends AbstractFragment implements RecyclerViewCallBackInterface {
+public class MainRecyclerViewFragment extends AbstractFragment implements  TreeViewFragmetnInterface.View {
 
+    TreeViewFragmetnInterface.Presenter presenter;
     RecyclerView recyclerView;
     EmployeeData employeeData;
-    FrameLayout conteiner;
+    LinearLayout conteiner;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         employeeData = new EmployeeData();
+
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
         Credentials credentials = new Credentials();
         credentials.setLogin(sharedPreferences.getString("Login","lgn"));
         credentials.setPassword(sharedPreferences.getString("Password","pwd"));
-        EmployeeRequestInterface employeeRequestInterface = new EmployeeRequest(credentials,employeeData,this);
-        employeeRequestInterface.getEmoloyees();
+        EmployeeRequest employeeRequest = new EmployeeRequest(credentials);
+        presenter = new TreeViewFragmentPresenter(this,employeeRequest);
+        ((TreeViewFragmentPresenter) presenter).getData();
     }
 
     @Nullable
@@ -62,16 +76,16 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        conteiner = (FrameLayout)view.findViewById(R.id.containerView);
+        conteiner = (LinearLayout)view.findViewById(R.id.containerView);
 
     }
 
+
     @Override
-    public void callBack(EmployeeData employeeData) {
+    public void createTreeView(EmployeeData employeeData) {
+        TreeNode root = TreeNode.root().setViewHolder(new RootViewHolder(getContext()));
+        TreeNode allNode = new TreeNode(employeeData).setViewHolder(new EmployeeDaatViewHolder(getContext()));
 
-        TreeNode root = TreeNode.root();
-
-        TreeNode allNode = new TreeNode(employeeData.getName());
 
         List<TreeNode> officesList = new ArrayList<>();
 
@@ -83,50 +97,107 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
             TreeNode office = new TreeNode(officeObj).setViewHolder(new OfficeViewHolder(getContext()));
             List<TreeNode> departmentsList = new ArrayList<>();
             if (employeeData.getOffices().get(i).getDepartments()!=null){
-            for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size() ; j++) {
-                Department departmentObj = new Department();
-                departmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getName());
-                departmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getID());
-                TreeNode department = new TreeNode(departmentObj).setViewHolder(new DepartmentViewHolder(getContext()));
-                if(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees()!=null){
-                Employee employee_ = new Employee();
-                TreeNode employeeTreeNode = new TreeNode(employee_).setViewHolder(new EmployeeViewHolder(getContext()));
-                departmentsList.add(employeeTreeNode);
-                }
-                List<TreeNode> subDepartmentsList = new ArrayList<>();
-                if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments()!=null){
-                    for (int k = 0; k <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size() ; k++) {
-                        SubDepartment subDepartmentObj = new SubDepartment();
-                        subDepartmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
-                        subDepartmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getID());
-                        TreeNode subDepartment = new TreeNode(subDepartmentObj).setViewHolder(new SubDepartmentViewHolder(getContext()));
+                for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size() ; j++) {
+                    Department departmentObj = new Department();
+                    departmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getName());
+                    departmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getID());
+                    TreeNode department = new TreeNode(departmentObj).setViewHolder(new DepartmentViewHolder(getContext()));
+                    List<TreeNode> subDepartmentsList = new ArrayList<>();
+                    if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments()!=null){
+                        for (int k = 0; k <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size() ; k++) {
 
-                        List<TreeNode>subEmployeeList = new ArrayList<>();
-                        if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees()!=null){
-                            //add employee tree node
-                            for (int l = 0; l <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().size(); l++) {
+                            SubDepartment subDepartmentObj = new SubDepartment();
+                            subDepartmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
+                            subDepartmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getID());
+                            TreeNode subDepartment = new TreeNode(subDepartmentObj).setViewHolder(new SubDepartmentViewHolder(getContext()));
 
-                                TreeNode subEmployees = new TreeNode(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getName());
-                                subEmployeeList.add(subEmployees);
+                            List<TreeNode>subEmployeeList = new ArrayList<>();
+                            if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees()!=null){
+                                //add employee tree node
+                                for (int l = 0; l <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().size(); l++) {
+                                    final Employee__ employee__obj = new Employee__();
+                                    employee__obj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getID());
+                                    employee__obj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getName());
+                                    employee__obj.setEmail(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getEmail());
+                                    employee__obj.setPhone(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getPhone());
+                                    employee__obj.setTitle(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getTitle());
+                                    TreeNode subEmployees = new TreeNode(employee__obj).setViewHolder(new Employee__ViewHolder(getContext())).setClickListener(new TreeNode.TreeNodeClickListener() {
+                                        @Override
+                                        public void onClick(TreeNode node, Object value) {
+//                                        Employee__
+
+                                            AbstractEmployee abstractEmployee = new AbstractEmployee();
+                                            abstractEmployee.setName(employee__obj.getName());
+                                            abstractEmployee.setID(employee__obj.getID());
+                                            abstractEmployee.setEmail(employee__obj.getEmail());
+                                            abstractEmployee.setPhone(employee__obj.getPhone());
+                                            abstractEmployee.setTitle(employee__obj.getTitle());
+                                            presenter.itemClicked(abstractEmployee);
+
+                                        }
+                                    });
+                                    subEmployeeList.add(subEmployees);
+                                }
+                            }else {
+
                             }
-                        }else {
-
+                            subDepartmentsList.add(subDepartment);
+                            subDepartment.addChildren(subEmployeeList);
                         }
-                        subDepartmentsList.add(subDepartment);
-                        subDepartment.addChildren(subEmployeeList);
-                    }
-                }else{
+                    }else if(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees()!=null){
 
+                        for (int k = 0; k<employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().size(); k++){
+                            final Employee_ employee_ = new Employee_();
+                            employee_.setName(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().get(k).getName());
+                            employee_.setID(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().get(k).getID());
+                            employee_.setEmail(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().get(k).getEmail());
+                            employee_.setTitle(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().get(k).getTitle());
+                            employee_.setPhone(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().get(k).getPhone());
+                            TreeNode employeeTreeNode = new TreeNode(employee_).setViewHolder(new Employee_ViewHolder(getContext())).setClickListener(new TreeNode.TreeNodeClickListener() {
+                                @Override
+                                public void onClick(TreeNode node, Object value) {
+
+                                    AbstractEmployee abstractEmployee = new AbstractEmployee();
+                                    abstractEmployee.setName(employee_.getName());
+                                    abstractEmployee.setID(employee_.getID());
+                                    abstractEmployee.setEmail(employee_.getEmail());
+                                    abstractEmployee.setPhone(employee_.getPhone());
+                                    abstractEmployee.setTitle(employee_.getTitle());
+                                    presenter.itemClicked(abstractEmployee);
+
+                                }
+                            });
+                            subDepartmentsList.add(employeeTreeNode);
+                        }
+                    }
+                    departmentsList.add(department);
+                    department.addChildren(subDepartmentsList);
                 }
-                departmentsList.add(department);
-                department.addChildren(subDepartmentsList);
-            }
 
             }else if(employeeData.getOffices().get(i).getEmployees()!=null){
                 //add employee treenode offices
                 for (int j = 0; j <employeeData.getOffices().get(i).getEmployees().size() ; j++) {
-                    Employee employee = new Employee();
-                    TreeNode officeEmployee = new TreeNode(employeeData.getOffices().get(i).getEmployees().get(j).getName());
+                    final Employee employee = new Employee();
+                    employee.setID(employeeData.getOffices().get(i).getEmployees().get(j).getID());
+                    employee.setName(employeeData.getOffices().get(i).getEmployees().get(j).getName());
+                    employee.setEmail(employeeData.getOffices().get(i).getEmployees().get(j).getEmail());
+                    employee.setTitle(employeeData.getOffices().get(i).getEmployees().get(j).getTitle());
+                    employee.setPhone(employeeData.getOffices().get(i).getEmployees().get(j).getPhone());
+                    TreeNode officeEmployee = new TreeNode(employee).setViewHolder(new EmployeeViewHolder(getContext())).setClickListener(new TreeNode.TreeNodeClickListener() {
+                        @Override
+                        public void onClick(TreeNode node, Object value) {
+                            //Employee
+
+                            AbstractEmployee abstractEmployee = new AbstractEmployee();
+                            abstractEmployee.setName(employee.getName());
+                            abstractEmployee.setID(employee.getID());
+                            abstractEmployee.setEmail(employee.getEmail());
+                            abstractEmployee.setPhone(employee.getPhone());
+                            abstractEmployee.setTitle(employee.getTitle());
+                            presenter.itemClicked(abstractEmployee);
+
+                        }
+                    });
                     departmentsList.add(officeEmployee);
                 }
             }
@@ -142,6 +213,21 @@ public class MainRecyclerViewFragment extends AbstractFragment implements Recycl
         AndroidTreeView treeView = new AndroidTreeView(getContext(), root);
         conteiner.addView(treeView.getView());
 
-
     }
+
+
+    @Override
+    public void changeFragment(AbstractEmployee abstractEmployee) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("employee",abstractEmployee);
+        AbstractFragment fragment = new EmployeeFragment();
+        fragment .setArguments(bundle);
+        controllerPresenter.addFragment(fragment);
+    }
+//    private SharedPreferences initTransfer(){
+//        SharedPreferences trPrefs = getContext().getSharedPreferences("transfer", Context.MODE_PRIVATE);
+//        return trPrefs;
+
+//    }
+
 }
