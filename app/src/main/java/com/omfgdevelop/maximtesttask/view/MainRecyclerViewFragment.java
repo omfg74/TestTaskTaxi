@@ -1,7 +1,6 @@
 package com.omfgdevelop.maximtesttask.view;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
@@ -25,7 +23,6 @@ import com.omfgdevelop.maximtesttask.model.Emplee.Employee__;
 import com.omfgdevelop.maximtesttask.model.Emplee.Office;
 import com.omfgdevelop.maximtesttask.model.Emplee.SubDepartment;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
 import com.omfgdevelop.maximtesttask.presenter.TreeViewFragmentPresenter;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.DepartmentViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.EmployeeDaatViewHolder;
@@ -34,6 +31,7 @@ import com.omfgdevelop.maximtesttask.view.ViewHolders.Employee_ViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.Employee__ViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.OfficeViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.RootViewHolder;
+import com.omfgdevelop.maximtesttask.view.ViewHolders.SubDepartmentViewHolder;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 

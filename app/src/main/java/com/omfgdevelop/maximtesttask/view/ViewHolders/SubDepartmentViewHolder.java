@@ -1,4 +1,4 @@
-package com.omfgdevelop.maximtesttask.view;
+package com.omfgdevelop.maximtesttask.view.ViewHolders;
 
 import android.content.Context;
 import android.view.LayoutInflater;

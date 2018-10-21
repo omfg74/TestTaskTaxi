@@ -5,11 +5,13 @@ import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface RetrofitInterface {
     @GET("Hello?")
@@ -17,4 +19,7 @@ public interface RetrofitInterface {
 //    void  getAuthData(@Query("login")String login, @Query("password")String password, Callback<AuthData> callback);
     @GET("GetAll?")
     Call<EmployeeData> getEmployeeData(@Query("login")String login, @Query("password")String password);
+
+    @GET
+    Call<ResponseBody> downloadFileWithDynamicUrlSync(@Url String fileUrl);
 }
