@@ -21,11 +21,14 @@ public class EmployeePresenrter implements EmployeeInterFace.Presenter, Employee
     }
 
     @Override
+    public void fetchImage(String login, String password) {
+
+    }
+
+    @Override
     public void callBack() {
 
     }
 
-    void fetchImage(String id){
 
-    }
 }

@@ -1,5 +1,6 @@
 package com.omfgdevelop.maximtesttask.view;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
     }
 
     @Override
-    public void setImage() {
+    public void setImage(Bitmap bitmap) {
 
     }
 
