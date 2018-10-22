@@ -1,8 +1,8 @@
 package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Emplee.*;
-import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
+import com.omfgdevelop.maximtesttask.model.Employee.*;
+import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
 import com.omfgdevelop.maximtesttask.view.interfaces.TreeViewFragmetnInterface;

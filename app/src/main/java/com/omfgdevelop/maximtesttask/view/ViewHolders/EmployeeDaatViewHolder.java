@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.omfgdevelop.maximtesttask.R;
-import com.omfgdevelop.maximtesttask.model.Emplee.Department;
-import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
+import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
 import com.unnamed.b.atv.model.TreeNode;
 
 public class EmployeeDaatViewHolder extends TreeNode.BaseNodeViewHolder<EmployeeData> {

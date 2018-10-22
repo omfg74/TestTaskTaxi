@@ -1,12 +1,11 @@
 
-package com.omfgdevelop.maximtesttask.model.Emplee;
+package com.omfgdevelop.maximtesttask.model.Employee;
 
-import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EmployeeData  {
+public class SubDepartment {
 
     @SerializedName("ID")
     @Expose
@@ -14,9 +13,9 @@ public class EmployeeData  {
     @SerializedName("Name")
     @Expose
     private String name;
-    @SerializedName("Departments")
+    @SerializedName("Employees")
     @Expose
-    private List<Office> offices = null;
+    private List<Employee__> employees = null;
 
     public String getID() {
         return iD;
@@ -34,12 +33,12 @@ public class EmployeeData  {
         this.name = name;
     }
 
-    public List<Office> getOffices() {
-        return offices;
+    public List<Employee__> getEmployees() {
+        return employees;
     }
 
-    public void setOffices(List<Office> departments) {
-        this.offices = departments;
+    public void setEmployees(List<Employee__> employees) {
+        this.employees = employees;
     }
 
 }

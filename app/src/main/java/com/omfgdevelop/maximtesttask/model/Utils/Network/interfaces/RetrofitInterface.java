@@ -1,15 +1,11 @@
 package com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces;
 
 import com.omfgdevelop.maximtesttask.model.AuthData;
-import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
-
-import java.util.List;
+import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 

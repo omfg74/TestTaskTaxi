@@ -3,9 +3,8 @@ package com.omfgdevelop.maximtesttask.view.interfaces;
 import android.content.Context;
 
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
-import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
+import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
-import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
 public interface TreeViewFragmetnInterface {
     interface View{

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.omfgdevelop.maximtesttask.R;
-import com.omfgdevelop.maximtesttask.model.Emplee.Office;
+import com.omfgdevelop.maximtesttask.model.Employee.Office;
 import com.unnamed.b.atv.model.TreeNode;
 
 public class OfficeViewHolder extends TreeNode.BaseNodeViewHolder<Office> {

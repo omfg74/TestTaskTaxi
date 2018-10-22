@@ -1,9 +1,8 @@
 
-package com.omfgdevelop.maximtesttask.model.Emplee;
+package com.omfgdevelop.maximtesttask.model.Employee;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
 
 public class Employee__ {
 

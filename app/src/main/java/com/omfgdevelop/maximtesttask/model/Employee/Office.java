@@ -1,5 +1,5 @@
 
-package com.omfgdevelop.maximtesttask.model.Emplee;
+package com.omfgdevelop.maximtesttask.model.Employee;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

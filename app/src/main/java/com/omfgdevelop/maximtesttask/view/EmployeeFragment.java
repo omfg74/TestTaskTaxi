@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
-import com.omfgdevelop.maximtesttask.model.Emplee.Employee;
 import com.omfgdevelop.maximtesttask.presenter.EmployeePresenrter;
 import com.omfgdevelop.maximtesttask.view.interfaces.EmployeeInterFace;
 

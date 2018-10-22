@@ -4,18 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
 
-import com.omfgdevelop.maximtesttask.model.Emplee.Employee;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.ImageRequest;
-import com.omfgdevelop.maximtesttask.view.AbstractFragment;
 import com.omfgdevelop.maximtesttask.view.interfaces.EmployeeImageCallBack;
 import com.omfgdevelop.maximtesttask.view.interfaces.EmployeeInterFace;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 import okhttp3.ResponseBody;
 
