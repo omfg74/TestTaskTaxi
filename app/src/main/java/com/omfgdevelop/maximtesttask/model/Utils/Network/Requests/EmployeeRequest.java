@@ -4,9 +4,8 @@ import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Emplee.*;
 import com.omfgdevelop.maximtesttask.model.Emplee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequestInterface;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
-import com.omfgdevelop.maximtesttask.view.TreeViewFragmetnInterface;
+import com.omfgdevelop.maximtesttask.view.interfaces.TreeViewFragmetnInterface;
 
 import java.util.ArrayList;
 import java.util.List;

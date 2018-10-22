@@ -8,6 +8,14 @@
     android:id="@+id/main_fragment_place"
     >
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_notification_clear_all" />
+
 
 
 </FrameLayout>

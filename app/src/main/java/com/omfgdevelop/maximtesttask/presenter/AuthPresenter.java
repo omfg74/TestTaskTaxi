@@ -38,7 +38,7 @@ public class AuthPresenter implements AuthFragmentInterface.Presenter,AuthCallBa
 
         credentials = new Credentials();
         if(!model.checkIfExists()){
-            view.setText("No data");
+
         credentials.setLogin(view.getLogin());
         credentials.setPassword(view.getPassword());
         AuthRequestInterface authRequest = new AuthRequest(credentials, this);
@@ -59,9 +59,12 @@ public class AuthPresenter implements AuthFragmentInterface.Presenter,AuthCallBa
             if(!model.checkIfExists())
             model.initEditor();
             model.addCredentials(credentials);
-        }
             view.setText("Saved");
             view.changeFragment();//Смена фрагмента
+        }else {
+            view.setText("Wrong user name or password");
+        }
+
         }
     }
 

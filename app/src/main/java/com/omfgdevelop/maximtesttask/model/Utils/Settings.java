@@ -2,11 +2,8 @@ package com.omfgdevelop.maximtesttask.model.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.content.SharedPreferencesCompat;
-import android.view.View;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.interfaces.SettingsInterface;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
 import static android.content.Context.MODE_PRIVATE;

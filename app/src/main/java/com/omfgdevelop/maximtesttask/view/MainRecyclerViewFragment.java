@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.omfgdevelop.maximtesttask.MainActivity;
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
 import com.omfgdevelop.maximtesttask.model.Credentials;
@@ -32,6 +33,7 @@ import com.omfgdevelop.maximtesttask.view.ViewHolders.Employee__ViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.OfficeViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.RootViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.SubDepartmentViewHolder;
+import com.omfgdevelop.maximtesttask.view.interfaces.TreeViewFragmetnInterface;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
@@ -44,11 +46,13 @@ public class MainRecyclerViewFragment extends AbstractFragment implements  TreeV
     RecyclerView recyclerView;
     EmployeeData employeeData;
     LinearLayout conteiner;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
         employeeData = new EmployeeData();
 
+        MainActivity.fab.setVisibility(View.VISIBLE);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
         Credentials credentials = new Credentials();
         credentials.setLogin(sharedPreferences.getString("Login","lgn"));
@@ -56,6 +60,12 @@ public class MainRecyclerViewFragment extends AbstractFragment implements  TreeV
         EmployeeRequest employeeRequest = new EmployeeRequest(credentials);
         presenter = new TreeViewFragmentPresenter(this,employeeRequest);
         ((TreeViewFragmentPresenter) presenter).getData();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
