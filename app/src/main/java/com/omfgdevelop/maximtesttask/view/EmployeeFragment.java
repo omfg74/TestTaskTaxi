@@ -88,9 +88,6 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
 
         presenrter = new EmployeePresenrter(this);
 
-
-
-
     }
 
     @Override

@@ -4,19 +4,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 import com.omfgdevelop.maximtesttask.view.AbstractFragment;
-import com.omfgdevelop.maximtesttask.view.MainRecyclerViewFragment;
+import com.omfgdevelop.maximtesttask.view.TreeViewFragment;
 import com.omfgdevelop.maximtesttask.view.interfaces.MainActivityInterface;
 
 
 public class MainActivity extends AppCompatActivity implements MainActivityInterface.View {
 private MainActivityPresenter presenter;
-MainRecyclerViewFragment fragment;
+TreeViewFragment fragment;
    public static FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

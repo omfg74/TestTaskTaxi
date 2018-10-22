@@ -40,7 +40,7 @@ import com.unnamed.b.atv.view.AndroidTreeView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainRecyclerViewFragment extends AbstractFragment implements  TreeViewFragmetnInterface.View {
+public class TreeViewFragment extends AbstractFragment implements  TreeViewFragmetnInterface.View {
 
     TreeViewFragmetnInterface.Presenter presenter;
     RecyclerView recyclerView;

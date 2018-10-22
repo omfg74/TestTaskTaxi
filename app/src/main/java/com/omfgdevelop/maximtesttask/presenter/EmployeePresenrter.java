@@ -41,9 +41,7 @@ public class EmployeePresenrter implements EmployeeInterFace.Presenter, Employee
 
     @Override
     public void emailClicked(String email) {
-        Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
-        mailIntent.setType("text/html");
-        mailIntent.putExtra(Intent.EXTRA_EMAIL, email);
+        Intent mailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","",email));
         view.startNewActivity(mailIntent);
     }
 
@@ -59,11 +57,7 @@ public class EmployeePresenrter implements EmployeeInterFace.Presenter, Employee
 
 
     @Override
-    public void callBack(ResponseBody responseBody) throws IOException {
-
-        InputStream inputStream = null;
-        FileOutputStream outputStream = null;
-
+    public void callBack(ResponseBody responseBody) {
 
         int width, height;
         Bitmap bitmap = BitmapFactory.decodeStream(responseBody.byteStream());

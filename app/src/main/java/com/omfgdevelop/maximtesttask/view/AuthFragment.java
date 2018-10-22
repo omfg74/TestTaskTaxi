@@ -5,19 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.omfgdevelop.maximtesttask.R;
-import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Utils.Settings;
 import com.omfgdevelop.maximtesttask.presenter.AuthPresenter;
-import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
 
@@ -72,7 +67,7 @@ public  class AuthFragment extends AbstractFragment implements AuthFragmentInter
 
     @Override
     public void changeFragment() {
-        controllerPresenter.addFragment(new MainRecyclerViewFragment());
+        controllerPresenter.addFragment(new TreeViewFragment());
     }
 
     @Override
