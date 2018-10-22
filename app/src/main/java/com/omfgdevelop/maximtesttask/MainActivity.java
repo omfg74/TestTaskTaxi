@@ -31,7 +31,7 @@ TreeViewFragment fragment;
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = getSharedPreferences("settings",MODE_PRIVATE);
                 sharedPreferences.edit().clear().commit();
-                finish();
+               presenter.getFragment();
             }
         });
         presenter.getFragment();
