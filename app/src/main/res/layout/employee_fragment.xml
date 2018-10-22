@@ -48,14 +48,7 @@
         android:id="@+id/empIDTextView"
 
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-
-        android:id="@+id/empEmailTextView"
-        />
-    <TextView
+      <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -65,8 +58,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:id="@+id/empTitleTextView"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/empEmailTextView"
         />
 
 </LinearLayout>

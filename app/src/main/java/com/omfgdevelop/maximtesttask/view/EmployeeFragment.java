@@ -54,11 +54,14 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
         empTitleTextView = getActivity().findViewById(R.id.empTitleTextView);
 
 
-        empNameTextView.setText(abstractEmployee.getName());
-        empIDTextView.setText(abstractEmployee.getID());
-        empEmailTextView.setText(abstractEmployee.getEmail());
-        empPhoneTextView.setText(abstractEmployee.getPhone());
-        empTitleTextView.setText(abstractEmployee.getTitle());
+        empNameTextView.setText("Name "+abstractEmployee.getName());
+        empIDTextView.setText("ID "+abstractEmployee.getID());
+        if(abstractEmployee.getEmail()!=null){
+        empEmailTextView.setText("E-mail "+abstractEmployee.getEmail());
+        }
+
+        empPhoneTextView.setText("tel "+abstractEmployee.getPhone());
+        empTitleTextView.setText("Title "+ abstractEmployee.getTitle());
         empPhoneTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,30 +100,6 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
 
     }
 
-    @Override
-    public void setName() {
-
-    }
-
-    @Override
-    public void setID() {
-
-    }
-
-    @Override
-    public void setEmail() {
-
-    }
-
-    @Override
-    public void setPhone() {
-
-    }
-
-    @Override
-    public void setTitle() {
-
-    }
 
     @Override
     public void startNewActivity(Intent intent) {

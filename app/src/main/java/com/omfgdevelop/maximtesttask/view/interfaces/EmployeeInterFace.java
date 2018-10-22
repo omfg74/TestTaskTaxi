@@ -6,11 +6,6 @@ import android.graphics.Bitmap;
 public  interface EmployeeInterFace {
     interface View{
         void setImage(Bitmap bitmap);
-        void setName();
-        void setID();
-        void setEmail();
-        void setPhone();
-        void setTitle();
         void startNewActivity(Intent intent);
     }
     interface Model{
