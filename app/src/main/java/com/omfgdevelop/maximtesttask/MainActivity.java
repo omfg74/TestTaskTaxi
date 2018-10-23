@@ -22,15 +22,13 @@ TreeViewFragment fragment;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = new MainActivityPresenter(this);
-
-
          fab = findViewById(R.id.fab);
         fab.setVisibility(View.INVISIBLE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("settings",MODE_PRIVATE);
-                sharedPreferences.edit().clear().commit();
+                fab.setVisibility(View.INVISIBLE);
+               presenter.clearSettings(getSharedPreferences("settings", MODE_PRIVATE));
                presenter.getFragment();
             }
         });
@@ -51,7 +49,7 @@ TreeViewFragment fragment;
 
     @Override
     public void setFragment(AbstractFragment fragment) {
-        fab.setVisibility(View.VISIBLE);
+//        fab.setVisibility(View.VISIBLE);
         fragment.attachPresenter(presenter);
         getSupportFragmentManager()
                 .beginTransaction()

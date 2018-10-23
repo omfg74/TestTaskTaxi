@@ -1,5 +1,7 @@
 package com.omfgdevelop.maximtesttask.presenter;
 
+import android.content.SharedPreferences;
+
 import com.omfgdevelop.maximtesttask.view.AbstractFragment;
 import com.omfgdevelop.maximtesttask.view.AuthFragment;
 import com.omfgdevelop.maximtesttask.view.interfaces.FragmentContract;
@@ -17,9 +19,10 @@ public class MainActivityPresenter implements MainActivityInterface.Presenter,Fr
 
     @Override
     public void getFragment() {
-
-        //Переделать
-        //Не совсем корректное поведение необходимо отслеживать активный фрагмент
        view.setFragment(new AuthFragment());
+    }
+
+    public void clearSettings(SharedPreferences sharedPreferences){
+        sharedPreferences.edit().clear().commit();
     }
 }
