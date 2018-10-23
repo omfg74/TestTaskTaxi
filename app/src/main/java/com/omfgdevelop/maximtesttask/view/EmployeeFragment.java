@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.omfgdevelop.maximtesttask.MainActivity;
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
 import com.omfgdevelop.maximtesttask.presenter.EmployeePresenrter;
@@ -45,39 +46,9 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
         AbstractEmployee abstractEmployee= (AbstractEmployee) bundle.getSerializable("employee");
-        imageView = (ImageView) getActivity().findViewById(R.id.employeeImageView);
-        empNameTextView = getActivity().findViewById(R.id.empNameTextView);
-        empIDTextView = getActivity().findViewById(R.id.empIDTextView);
-        empEmailTextView = getActivity().findViewById(R.id.empEmailTextView);
-        empPhoneTextView = getActivity().findViewById(R.id.empPhoneTextView);
-        empTitleTextView = getActivity().findViewById(R.id.empTitleTextView);
-
-
-        empNameTextView.setText("Name "+abstractEmployee.getName());
-        empIDTextView.setText("ID "+abstractEmployee.getID());
-        if(abstractEmployee.getEmail()!=null){
-        empEmailTextView.setText("E-mail "+abstractEmployee.getEmail());
-        }
-
-        empPhoneTextView.setText("tel "+abstractEmployee.getPhone());
-        empTitleTextView.setText("Title "+ abstractEmployee.getTitle());
-        empPhoneTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenrter.phoneCkicked(empPhoneTextView.getText().toString());
-                Toast.makeText(getContext(), "PHONE "+empPhoneTextView.getText().toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
-        empEmailTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenrter.emailClicked(empEmailTextView.getText().toString());
-                Toast.makeText(getContext(), "Email "+empEmailTextView.getText().toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
+        setViews();
+        setText(abstractEmployee);
+        setListners();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
         String name = sharedPreferences.getString("Login", null);
         String password = sharedPreferences.getString("Password", null);
@@ -89,6 +60,13 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
         super.onCreate(savedInstanceState);
 
         presenrter = new EmployeePresenrter(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity.fab.setVisibility(View.VISIBLE);
 
     }
 
@@ -106,4 +84,40 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
         startActivity(intent);
     }
 
+    private void setViews(){
+        imageView = (ImageView) getActivity().findViewById(R.id.employeeImageView);
+        empNameTextView = getActivity().findViewById(R.id.empNameTextView);
+        empIDTextView = getActivity().findViewById(R.id.empIDTextView);
+        empEmailTextView = getActivity().findViewById(R.id.empEmailTextView);
+        empPhoneTextView = getActivity().findViewById(R.id.empPhoneTextView);
+        empTitleTextView = getActivity().findViewById(R.id.empTitleTextView);
+    }
+
+    private void setText(AbstractEmployee abstractEmployee){
+        empNameTextView.setText("Name "+abstractEmployee.getName());
+        empIDTextView.setText("ID "+abstractEmployee.getID());
+        if(abstractEmployee.getEmail()!=null){
+            empEmailTextView.setText("E-mail "+abstractEmployee.getEmail());
+        }
+
+        empPhoneTextView.setText("tel "+abstractEmployee.getPhone());
+        empTitleTextView.setText("Title "+ abstractEmployee.getTitle());
+    }
+
+    private void setListners(){
+        empPhoneTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenrter.phoneCkicked(empPhoneTextView.getText().toString());
+                Toast.makeText(getContext(), "PHONE "+empPhoneTextView.getText().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        empEmailTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenrter.emailClicked(empEmailTextView.getText().toString());
+                Toast.makeText(getContext(), "Email "+empEmailTextView.getText().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
