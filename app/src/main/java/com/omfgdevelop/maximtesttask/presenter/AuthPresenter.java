@@ -1,5 +1,6 @@
 package com.omfgdevelop.maximtesttask.presenter;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,35 +25,39 @@ import retrofit2.Response;
 public class AuthPresenter implements AuthFragmentInterface.Presenter,AuthCallBackInterface {
     private AuthFragmentInterface.View view;
     private AuthFragmentInterface.Model.Settings model;
+    private Context context;
+    private static
 
     private Credentials credentials;
-    public AuthPresenter(AuthFragmentInterface.View view, AuthFragmentInterface.Model.Settings model) {
+    public AuthPresenter(AuthFragmentInterface.View view) {
         this.view = view;
-        this.model = model;
-
+        context = getContext();
+        this.model = new Settings(context.getSharedPreferences("settings",Context.MODE_PRIVATE));
     }
-
+    @Override
+    public void onCreate() {
+        view.setElements();
+        view.setButton();
+        view.setTestText();
+    }
     @Override
     public void buttonClicked() {
-        //Уточнить этот момент
-
         credentials = new Credentials();
         if(!model.checkIfExists()){
-
         credentials.setLogin(view.getLogin());
         credentials.setPassword(view.getPassword());
         AuthRequestInterface authRequest = new AuthRequest(credentials, this);
                 authRequest.createAuthRequest();
     }else {
-//            if(credentials.getLogin().equals(model.getCredentials().getLogin())||credentials.getPassword().equals(model.getCredentials().getPassword())){
-            view.setText("Welcome Back");//add string value
-            view.changeFragment();
-//        }else {
-//                view.setText("Wrong login or password");
-//            }
+            view.setText("Welcome Back");
         }
     }
-
+    @Override
+    public void checkSettings() {
+        if(model.checkIfExists()){
+           view.attachFragmentToContainer();
+        }
+    }
     @Override
     public void callBackCall(AuthData authData) {
         if (authData.getSuccess() == true) {
@@ -60,12 +65,8 @@ public class AuthPresenter implements AuthFragmentInterface.Presenter,AuthCallBa
             model.initEditor();
             model.addCredentials(credentials);
             view.setText("Saved");
-            view.changeFragment();//Смена фрагмента
         }else {
             view.setText("Wrong user name or password");
-        }
-
-        }
-    }
+        }}}
 
 

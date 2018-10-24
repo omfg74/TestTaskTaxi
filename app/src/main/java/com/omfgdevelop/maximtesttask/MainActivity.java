@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 import com.omfgdevelop.maximtesttask.view.AbstractFragment;
+import com.omfgdevelop.maximtesttask.view.AuthFragment;
 import com.omfgdevelop.maximtesttask.view.TreeViewFragment;
 import com.omfgdevelop.maximtesttask.view.interfaces.MainActivityInterface;
 
@@ -16,23 +17,14 @@ import com.omfgdevelop.maximtesttask.view.interfaces.MainActivityInterface;
 public class MainActivity extends AppCompatActivity implements MainActivityInterface.View {
 private MainActivityPresenter presenter;
 TreeViewFragment fragment;
-   public static FloatingActionButton fab;
+   private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = new MainActivityPresenter(this);
-         fab = findViewById(R.id.fab);
-        fab.setVisibility(View.INVISIBLE);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fab.setVisibility(View.INVISIBLE);
-               presenter.clearSettings(getSharedPreferences("settings", MODE_PRIVATE));
-               presenter.getFragment();
-            }
-        });
-        presenter.getFragment();
+        presenter.onCreate();
+
     }
 
     @Override
@@ -47,14 +39,39 @@ TreeViewFragment fragment;
         fab.setVisibility(View.INVISIBLE);
     }
 
+//    @Override
+//    public void setFragment(AbstractFragment fragment) {
+////        fab.setVisibility(View.VISIBLE);
+//        fragment.attachPresenter(presenter);
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.main_fragment_place,fragment)
+//                .addToBackStack(null)
+//                .commit();
+//    }
+
     @Override
-    public void setFragment(AbstractFragment fragment) {
-//        fab.setVisibility(View.VISIBLE);
-        fragment.attachPresenter(presenter);
+    public void setFabListner() {
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fab.setVisibility(View.INVISIBLE);
+                presenter.clearSettings(getSharedPreferences("settings", MODE_PRIVATE));
+                presenter.onCreate();
+            }
+        });
+    }
+
+    @Override
+    public void attachFragmentToContainer() {
+
+        AuthFragment authFragment = new AuthFragment();
+
+        fab.setVisibility(View.VISIBLE);
+//        authFragment.attachPresenter(presenter);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_fragment_place,fragment)
-                .addToBackStack(null)
-                .commit();
+                .replace(R.layout.main_)
     }
 }

@@ -9,15 +9,21 @@ import com.omfgdevelop.maximtesttask.model.Credentials;
 
 public interface AuthFragmentInterface {
     interface View{
+        void attachFragmentToContainer();
         String getLogin();
         String getPassword();
-        void changeFragment();
+        void setElements();
+        void setButton();
+//        void changeFragment();
         void setText(String str);
+        void setTestText();
+
     }
     interface Presenter{
 
+        void onCreate();
         void buttonClicked();
-
+        void checkSettings();
 
     }
     interface Model{

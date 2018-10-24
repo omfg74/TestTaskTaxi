@@ -6,9 +6,13 @@ import com.omfgdevelop.maximtesttask.view.AbstractFragment;
 
 public interface MainActivityInterface {
     interface View{
-        void setFragment(AbstractFragment fragment);
+//        void setFragment(AbstractFragment fragment);
+        void setFabListner();
+        void attachFragmentToContainer();
     }
     interface Presenter{
-        void getFragment();
+        void onCreate();
+//        void getFragment();
     }
+
 }
