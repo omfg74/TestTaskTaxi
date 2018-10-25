@@ -1,5 +1,6 @@
 package com.omfgdevelop.maximtesttask;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -32,12 +33,12 @@ TreeViewFragment fragment;
         super.onResume();
 
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        fab.setVisibility(View.INVISIBLE);
-    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//    }
+//        fab.setVisibility(View.INVISIBLE);
 
 //    @Override
 //    public void setFragment(AbstractFragment fragment) {
@@ -72,6 +73,8 @@ TreeViewFragment fragment;
 //        authFragment.attachPresenter(presenter);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.layout.main_)
+                .replace(R.id.main_fragment_place,authFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

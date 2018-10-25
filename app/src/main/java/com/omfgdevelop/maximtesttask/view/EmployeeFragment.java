@@ -66,7 +66,7 @@ public class EmployeeFragment extends AbstractFragment implements EmployeeInterF
     @Override
     public void onResume() {
         super.onResume();
-        MainActivity.fab.setVisibility(View.VISIBLE);
+//        MainActivity.fab.setVisibility(View.VISIBLE);
 
     }
 

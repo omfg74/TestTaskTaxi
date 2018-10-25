@@ -39,7 +39,6 @@ public  class AuthFragment extends Fragment implements AuthFragmentInterface.Vie
         super.onViewCreated(view, savedInstanceState);
         presenter = new AuthPresenter(this);
         presenter.onCreate();
-        presenter.checkSettings();
     }
     @Override
     public void attachFragmentToContainer() {
@@ -79,6 +78,6 @@ public  class AuthFragment extends Fragment implements AuthFragmentInterface.Vie
     @Override
     public void setTestText() {
         loginEditText.setText("test_user");
-        passwordEditText.setText("test_password");
+        passwordEditText.setText("test_pass");
     }
 }

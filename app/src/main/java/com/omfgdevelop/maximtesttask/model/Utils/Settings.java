@@ -3,6 +3,7 @@ package com.omfgdevelop.maximtesttask.model.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.omfgdevelop.maximtesttask.ContentProvider;
 import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
@@ -46,7 +47,7 @@ public class Settings  implements AuthFragmentInterface.Model.Settings {
 
     @Override
     public Credentials getCredentials() {
-        preferences = context.getSharedPreferences(STORAGE_NAME,MODE_PRIVATE);
+        preferences = ContentProvider.getContext().getSharedPreferences(STORAGE_NAME,MODE_PRIVATE);
         Credentials credentials = new Credentials();
         credentials.setLogin(preferences.getString("Login",null));
         credentials.setPassword(preferences.getString("Password",null));

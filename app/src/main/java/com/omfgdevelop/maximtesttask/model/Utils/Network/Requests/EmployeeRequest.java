@@ -20,14 +20,14 @@ public class EmployeeRequest implements TreeViewFragmetnInterface.Model.Request 
    RecyclerViewCallBackInterface callBack;
    Credentials credentials;
 
-    public EmployeeRequest(Credentials credentials) {
+    public EmployeeRequest() {
         this.employeeData = employeeData;
         this.callBack = callBack;
         this.credentials = credentials;
     }
 
     @Override
-    public void getEmoloyees( final RecyclerViewCallBackInterface callBack) {
+    public void getEmoloyees( final RecyclerViewCallBackInterface callBack, Credentials credentials) {
         employeeData = new EmployeeData();
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         try {

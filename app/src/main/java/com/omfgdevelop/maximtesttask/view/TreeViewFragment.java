@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,26 +41,28 @@ import com.unnamed.b.atv.view.AndroidTreeView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeViewFragment extends AbstractFragment implements  TreeViewFragmetnInterface.View {
+public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInterface.View {
 
     TreeViewFragmetnInterface.Presenter presenter;
     RecyclerView recyclerView;
     EmployeeData employeeData;
     LinearLayout conteiner;
+    View view;
 
     @Override
     public void onResume() {
         super.onResume();
-        employeeData = new EmployeeData();
+        presenter = new TreeViewFragmentPresenter(this);
+        presenter.onCreate();
 
-        MainActivity.fab.setVisibility(View.VISIBLE);
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
-        Credentials credentials = new Credentials();
-        credentials.setLogin(sharedPreferences.getString("Login","lgn"));
-        credentials.setPassword(sharedPreferences.getString("Password","pwd"));
-        EmployeeRequest employeeRequest = new EmployeeRequest(credentials);
-        presenter = new TreeViewFragmentPresenter(this,employeeRequest);
-        ((TreeViewFragmentPresenter) presenter).getData();
+//        employeeData = new EmployeeData();
+//        SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+//        Credentials credentials = new Credentials();
+//        credentials.setLogin(sharedPreferences.getString("Login","lgn"));
+//        credentials.setPassword(sharedPreferences.getString("Password","pwd"));
+//        EmployeeRequest employeeRequest = new EmployeeRequest(credentials);
+//        presenter = new TreeViewFragmentPresenter(this,employeeRequest);
+//        ((TreeViewFragmentPresenter) presenter).getData();
     }
 
     @Override
@@ -71,24 +74,21 @@ public class TreeViewFragment extends AbstractFragment implements  TreeViewFragm
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      return   super.onCreateView(inflater, container, savedInstanceState);
-
+        super.onCreateView(inflater, container, savedInstanceState);
+        view = inflater.inflate(R.layout.auth_fragment,container,false);
+        return view;
     }
 
-    @Override
-    protected int getLayout() {
-        return R.layout.main_list_fragment;
-    }
+//    @Override
+//    protected int getLayout() {
+//        return R.layout.main_list_fragment;
+//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         conteiner = (LinearLayout)view.findViewById(R.id.containerView);
-
     }
-
-
     @Override
     public void createTreeView(EmployeeData employeeData) {
         TreeNode root = TreeNode.root().setViewHolder(new RootViewHolder(getContext()));
@@ -223,19 +223,32 @@ public class TreeViewFragment extends AbstractFragment implements  TreeViewFragm
 
     }
 
-
     @Override
-    public void changeFragment(AbstractEmployee abstractEmployee) {
-        Bundle bundle = new Bundle();
+    public void attachFragmentToContainer(AbstractEmployee abstractEmployee) {
+                Bundle bundle = new Bundle();
         bundle.putSerializable("employee",abstractEmployee);
-        AbstractFragment fragment = new EmployeeFragment();
-        fragment .setArguments(bundle);
-        controllerPresenter.addFragment(fragment);
+        EmployeeFragment employeeFragment = new EmployeeFragment();
+        employeeFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.main_fragment_place,employeeFragment)
+                .commit();
     }
+}
+//
+//    @Override
+//    public void changeFragment(AbstractEmployee abstractEmployee) {
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("employee",abstractEmployee);
+//        AbstractFragment fragment = new EmployeeFragment();
+//        fragment .setArguments(bundle);
+//        controllerPresenter.addFragment(fragment);
+
 //    private SharedPreferences initTransfer(){
 //        SharedPreferences trPrefs = getContext().getSharedPreferences("transfer", Context.MODE_PRIVATE);
 //        return trPrefs;
 
 //    }
 
-}
+//}
