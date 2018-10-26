@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new MainActivityPresenter(this);
+        presenter = new MainActivityPresenter(this);//
         presenter.onCreate();
     }
     @Override
