@@ -29,8 +29,8 @@ public class ExampleInstrumentedTest {
         credentials.setLogin("test_user");
         credentials.setPassword("test_pass");
 
-        EmployeeRequestInterface employeeRequestInterface = new EmployeeRequest();
-        employeeRequestInterface.getEmoloyees(credentials, appContext);
+//        EmployeeRequestInterface employeeRequestInterface = new EmployeeRequest();
+//        employeeRequestInterface.getEmoloyees(credentials, appContext);
         assertEquals("com.omfgdevelop.maximtesttask", appContext.getPackageName());
     }
 }
