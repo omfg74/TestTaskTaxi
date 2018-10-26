@@ -21,10 +21,9 @@ public class MainActivityPresenter implements MainActivityInterface.Presenter {
         view.attachFragmentToContainer();
     }
 
-
     @Override
     public void deleteSettings() {
         SharedPreferences sharedPreferences = ContentProvider.getContext().getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
+        sharedPreferences.edit().clear().apply();
     }
 }

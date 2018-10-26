@@ -33,14 +33,14 @@ public class Settings implements AuthFragmentInterface.Model.Settings {
         } else {
             editor.putString("Login", credentials.getLogin());
             editor.putString("Password", credentials.getPassword());
-            editor.commit();
+            editor.apply();
         }
     }
 
     @Override
     public void delCredentials() {
         SharedPreferences sharedPreferences = ContentProvider.getContext().getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
+        sharedPreferences.edit().clear().apply();
     }
 
     @Override
