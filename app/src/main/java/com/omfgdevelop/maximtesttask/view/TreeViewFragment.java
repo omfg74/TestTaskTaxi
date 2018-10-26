@@ -89,11 +89,7 @@ public class TreeViewFragment extends Fragment implements TreeViewFragmetnInterf
     public void createTreeView(EmployeeData employeeData) {
         TreeNode root = TreeNode.root().setViewHolder(new RootViewHolder(getContext()));
         TreeNode allNode = new TreeNode(employeeData).setViewHolder(new EmployeeDaatViewHolder(getContext()));
-
-
         List<TreeNode> officesList = new ArrayList<>();
-
-
         for (int i = 0; i < employeeData.getOffices().size(); i++) {
             Office officeObj = new Office();
             officeObj.setName(employeeData.getOffices().get(i).getName());

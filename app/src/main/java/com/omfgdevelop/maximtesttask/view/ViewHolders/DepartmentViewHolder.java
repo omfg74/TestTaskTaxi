@@ -23,7 +23,6 @@ public class DepartmentViewHolder extends TreeNode.BaseNodeViewHolder<Department
         View view = layoutInflater.inflate(R.layout.offcie_layout, null, false);
         TextView idTextView = view.findViewById(R.id.office_id_textView);
         TextView nameTextView = view.findViewById(R.id.offoceNameTextView);
-
         idTextView.setText("ID " + value.getID());
         nameTextView.setText("Name " + value.getName());
         return view;
