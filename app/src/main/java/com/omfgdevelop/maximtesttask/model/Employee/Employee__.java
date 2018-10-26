@@ -1,4 +1,3 @@
-
 package com.omfgdevelop.maximtesttask.model.Employee;
 
 import com.google.gson.annotations.Expose;

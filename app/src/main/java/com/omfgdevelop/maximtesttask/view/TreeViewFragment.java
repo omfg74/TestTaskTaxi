@@ -1,8 +1,6 @@
 package com.omfgdevelop.maximtesttask.view;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.omfgdevelop.maximtesttask.MainActivity;
 import com.omfgdevelop.maximtesttask.R;
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
-import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Employee.Department;
 import com.omfgdevelop.maximtesttask.model.Employee.Employee;
 import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
@@ -24,7 +20,6 @@ import com.omfgdevelop.maximtesttask.model.Employee.Employee_;
 import com.omfgdevelop.maximtesttask.model.Employee.Employee__;
 import com.omfgdevelop.maximtesttask.model.Employee.Office;
 import com.omfgdevelop.maximtesttask.model.Employee.SubDepartment;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
 import com.omfgdevelop.maximtesttask.presenter.TreeViewFragmentPresenter;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.DepartmentViewHolder;
 import com.omfgdevelop.maximtesttask.view.ViewHolders.EmployeeDaatViewHolder;
@@ -41,7 +36,7 @@ import com.unnamed.b.atv.view.AndroidTreeView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInterface.View {
+public class TreeViewFragment extends Fragment implements TreeViewFragmetnInterface.View {
 
     TreeViewFragmetnInterface.Presenter presenter;
     RecyclerView recyclerView;
@@ -75,7 +70,7 @@ public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInter
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        view = inflater.inflate(R.layout.auth_fragment,container,false);
+        view = inflater.inflate(R.layout.main_list_fragment, container, false);
         return view;
     }
 
@@ -87,8 +82,9 @@ public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        conteiner = (LinearLayout)view.findViewById(R.id.containerView);
+        conteiner = (LinearLayout) view.findViewById(R.id.containerView);
     }
+
     @Override
     public void createTreeView(EmployeeData employeeData) {
         TreeNode root = TreeNode.root().setViewHolder(new RootViewHolder(getContext()));
@@ -98,31 +94,31 @@ public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInter
         List<TreeNode> officesList = new ArrayList<>();
 
 
-        for (int i = 0; i <employeeData.getOffices().size() ; i++) {
+        for (int i = 0; i < employeeData.getOffices().size(); i++) {
             Office officeObj = new Office();
             officeObj.setName(employeeData.getOffices().get(i).getName());
             officeObj.setID(employeeData.getOffices().get(i).getID());
             TreeNode office = new TreeNode(officeObj).setViewHolder(new OfficeViewHolder(getContext()));
             List<TreeNode> departmentsList = new ArrayList<>();
-            if (employeeData.getOffices().get(i).getDepartments()!=null){
-                for (int j = 0; j <employeeData.getOffices().get(i).getDepartments().size() ; j++) {
+            if (employeeData.getOffices().get(i).getDepartments() != null) {
+                for (int j = 0; j < employeeData.getOffices().get(i).getDepartments().size(); j++) {
                     Department departmentObj = new Department();
                     departmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getName());
                     departmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getID());
                     TreeNode department = new TreeNode(departmentObj).setViewHolder(new DepartmentViewHolder(getContext()));
                     List<TreeNode> subDepartmentsList = new ArrayList<>();
-                    if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments()!=null){
-                        for (int k = 0; k <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size() ; k++) {
+                    if (employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments() != null) {
+                        for (int k = 0; k < employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().size(); k++) {
 
                             SubDepartment subDepartmentObj = new SubDepartment();
                             subDepartmentObj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getName());
                             subDepartmentObj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getID());
                             TreeNode subDepartment = new TreeNode(subDepartmentObj).setViewHolder(new SubDepartmentViewHolder(getContext()));
 
-                            List<TreeNode>subEmployeeList = new ArrayList<>();
-                            if(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees()!=null){
+                            List<TreeNode> subEmployeeList = new ArrayList<>();
+                            if (employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees() != null) {
                                 //add employee tree node
-                                for (int l = 0; l <employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().size(); l++) {
+                                for (int l = 0; l < employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().size(); l++) {
                                     final Employee__ employee__obj = new Employee__();
                                     employee__obj.setID(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getID());
                                     employee__obj.setName(employeeData.getOffices().get(i).getDepartments().get(j).getSubDepartments().get(k).getEmployees().get(l).getName());
@@ -146,15 +142,15 @@ public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInter
                                     });
                                     subEmployeeList.add(subEmployees);
                                 }
-                            }else {
+                            } else {
 
                             }
                             subDepartmentsList.add(subDepartment);
                             subDepartment.addChildren(subEmployeeList);
                         }
-                    }else if(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees()!=null){
+                    } else if (employeeData.getOffices().get(i).getDepartments().get(j).getEmployees() != null) {
 
-                        for (int k = 0; k<employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().size(); k++){
+                        for (int k = 0; k < employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().size(); k++) {
                             final Employee_ employee_ = new Employee_();
                             employee_.setName(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().get(k).getName());
                             employee_.setID(employeeData.getOffices().get(i).getDepartments().get(j).getEmployees().get(k).getID());
@@ -182,9 +178,9 @@ public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInter
                     department.addChildren(subDepartmentsList);
                 }
 
-            }else if(employeeData.getOffices().get(i).getEmployees()!=null){
+            } else if (employeeData.getOffices().get(i).getEmployees() != null) {
                 //add employee treenode offices
-                for (int j = 0; j <employeeData.getOffices().get(i).getEmployees().size() ; j++) {
+                for (int j = 0; j < employeeData.getOffices().get(i).getEmployees().size(); j++) {
                     final Employee employee = new Employee();
                     employee.setID(employeeData.getOffices().get(i).getEmployees().get(j).getID());
                     employee.setName(employeeData.getOffices().get(i).getEmployees().get(j).getName());
@@ -225,30 +221,16 @@ public class TreeViewFragment extends Fragment implements  TreeViewFragmetnInter
 
     @Override
     public void attachFragmentToContainer(AbstractEmployee abstractEmployee) {
-                Bundle bundle = new Bundle();
-        bundle.putSerializable("employee",abstractEmployee);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("employee", abstractEmployee);
         EmployeeFragment employeeFragment = new EmployeeFragment();
         employeeFragment.setArguments(bundle);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.main_fragment_place,employeeFragment)
+                .replace(R.id.main_fragment_place, employeeFragment)
                 .commit();
     }
+
+
 }
-//
-//    @Override
-//    public void changeFragment(AbstractEmployee abstractEmployee) {
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("employee",abstractEmployee);
-//        AbstractFragment fragment = new EmployeeFragment();
-//        fragment .setArguments(bundle);
-//        controllerPresenter.addFragment(fragment);
-
-//    private SharedPreferences initTransfer(){
-//        SharedPreferences trPrefs = getContext().getSharedPreferences("transfer", Context.MODE_PRIVATE);
-//        return trPrefs;
-
-//    }
-
-//}

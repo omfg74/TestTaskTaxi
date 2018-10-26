@@ -2,20 +2,19 @@ package com.omfgdevelop.maximtesttask.presenter;
 
 import android.content.SharedPreferences;
 
-import com.omfgdevelop.maximtesttask.view.AbstractFragment;
-import com.omfgdevelop.maximtesttask.view.AuthFragment;
+import com.omfgdevelop.maximtesttask.ContentProvider;
 import com.omfgdevelop.maximtesttask.view.interfaces.FragmentContract;
 import com.omfgdevelop.maximtesttask.view.interfaces.MainActivityInterface;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.omfgdevelop.maximtesttask.model.Utils.Settings.STORAGE_NAME;
+
 public class MainActivityPresenter implements MainActivityInterface.Presenter, FragmentContract.Presenter {
     private MainActivityInterface.View view;
-    public MainActivityPresenter(MainActivityInterface.View view){
+
+    public MainActivityPresenter(MainActivityInterface.View view) {
         this.view = view;
     }
-//    @Override
-//    public void addFragment(AbstractFragment fragment) {
-//        view.setFragment(fragment);
-//    }
 
     @Override
     public void onCreate() {
@@ -23,17 +22,13 @@ public class MainActivityPresenter implements MainActivityInterface.Presenter, F
         view.attachFragmentToContainer();
     }
 
-//    @Override
-//    public void getFragment() {
-//       view.setFragment(new AuthFragment());
-//    }
-
-    public void clearSettings(SharedPreferences sharedPreferences){
-        sharedPreferences.edit().clear().commit();
+    @Override
+    public void addFragment(AbstractFragment fragment) {
     }
 
     @Override
-    public void addFragment(AbstractFragment fragment) {
-
+    public void deleteSettings() {
+        SharedPreferences sharedPreferences = ContentProvider.getContext().getSharedPreferences(STORAGE_NAME, MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
     }
 }

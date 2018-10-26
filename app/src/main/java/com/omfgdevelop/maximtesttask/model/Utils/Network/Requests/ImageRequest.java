@@ -26,8 +26,8 @@ public class ImageRequest implements EmployeeInterFace.Model {
     public void getImage() {
 
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        try{
-            Call<ResponseBody> response  = retrofitClient.getRetrofitInterface().downloadFileWithDynamicUrlSync(url);
+        try {
+            Call<ResponseBody> response = retrofitClient.getRetrofitInterface().downloadFileWithDynamicUrlSync(url);
             response.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -45,7 +45,9 @@ public class ImageRequest implements EmployeeInterFace.Model {
 
                 }
             });
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

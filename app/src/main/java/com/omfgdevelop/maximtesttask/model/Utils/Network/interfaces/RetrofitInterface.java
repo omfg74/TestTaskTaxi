@@ -11,10 +11,11 @@ import retrofit2.http.Url;
 
 public interface RetrofitInterface {
     @GET("Hello?")
-    Call<AuthData> getAuthData(@Query("login")String login, @Query("password")String password);
-//    void  getAuthData(@Query("login")String login, @Query("password")String password, Callback<AuthData> callback);
+    Call<AuthData> getAuthData(@Query("login") String login, @Query("password") String password);
+
+    //    void  getAuthData(@Query("login")String login, @Query("password")String password, Callback<AuthData> callback);
     @GET("GetAll?")
-    Call<EmployeeData> getEmployeeData(@Query("login")String login, @Query("password")String password);
+    Call<EmployeeData> getEmployeeData(@Query("login") String login, @Query("password") String password);
 
     @GET
     Call<ResponseBody> downloadFileWithDynamicUrlSync(@Url String fileUrl);

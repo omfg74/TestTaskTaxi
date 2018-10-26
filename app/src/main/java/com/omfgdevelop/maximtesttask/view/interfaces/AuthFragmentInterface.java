@@ -1,38 +1,46 @@
 package com.omfgdevelop.maximtesttask.view.interfaces;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-
 import com.omfgdevelop.maximtesttask.model.Credentials;
 
 
 public interface AuthFragmentInterface {
-    interface View{
+    interface View {
         void attachFragmentToContainer();
+
         String getLogin();
+
         String getPassword();
+
         void setElements();
+
         void setButton();
-//        void changeFragment();
+
+        //        void changeFragment();
         void setText(String str);
+
         void setTestText();
-
     }
-    interface Presenter{
 
+    interface Presenter {
         void onCreate();
-        void buttonClicked();
-        void checkSettings();
 
+        void buttonClicked();
+
+        void checkSettings();
+//        void deleteSettings();
     }
-    interface Model{
-        interface Settings{
-void initEditor();
-void  addCredentials(Credentials credentials);
-        void delCredentials();
-        Credentials getCredentials();
-       boolean checkIfExists();
+
+    interface Model {
+        interface Settings {
+            void initEditor();
+
+            void addCredentials(Credentials credentials);
+
+            void delCredentials();
+
+            Credentials getCredentials();
+
+            boolean checkIfExists();
+        }
     }
-}
 }

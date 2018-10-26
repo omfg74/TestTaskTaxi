@@ -11,6 +11,7 @@ import com.unnamed.b.atv.model.TreeNode;
 
 public class Employee__ViewHolder extends TreeNode.BaseNodeViewHolder<Employee__> {
     Context context;
+
     public Employee__ViewHolder(Context context) {
         super(context);
         this.context = context;
@@ -19,13 +20,13 @@ public class Employee__ViewHolder extends TreeNode.BaseNodeViewHolder<Employee__
     @Override
     public View createNodeView(TreeNode node, Employee__ value) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.employee_layout,null,false);
+        View view = layoutInflater.inflate(R.layout.employee_layout, null, false);
         TextView idTextView = view.findViewById(R.id.employeeIdTextView);
         TextView nameTextView = view.findViewById(R.id.employeeNameTextView);
 
 
-        System.out.println("TEST ID"+value.getID());
-        System.out.println("TEST NAME"+value.getName());
+        System.out.println("TEST ID" + value.getID());
+        System.out.println("TEST NAME" + value.getName());
         idTextView.setText(value.getID());
         nameTextView.setText(value.getName());
 

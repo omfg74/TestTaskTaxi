@@ -11,7 +11,7 @@ import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.EmployeeRequ
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -25,12 +25,12 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-            Credentials credentials = new Credentials();
-            credentials.setLogin("test_user");
-            credentials.setPassword("test_pass");
+        Credentials credentials = new Credentials();
+        credentials.setLogin("test_user");
+        credentials.setPassword("test_pass");
 
         EmployeeRequestInterface employeeRequestInterface = new EmployeeRequest();
-        employeeRequestInterface.getEmoloyees(credentials,appContext);
+        employeeRequestInterface.getEmoloyees(credentials, appContext);
         assertEquals("com.omfgdevelop.maximtesttask", appContext.getPackageName());
     }
 }

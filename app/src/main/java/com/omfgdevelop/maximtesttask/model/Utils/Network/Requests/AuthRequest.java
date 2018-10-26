@@ -1,7 +1,5 @@
 package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
 
-import android.util.Log;
-
 import com.omfgdevelop.maximtesttask.model.AuthData;
 import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
@@ -30,15 +28,15 @@ public class AuthRequest implements AuthRequestInterface {
     @Override
     public void createAuthRequest() {
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        try{
-            Call<AuthData> response = retrofitClient.getRetrofitInterface().getAuthData(credentials.getLogin(),credentials.getPassword());
+        try {
+            Call<AuthData> response = retrofitClient.getRetrofitInterface().getAuthData(credentials.getLogin(), credentials.getPassword());
             response.enqueue(new Callback<AuthData>() {
                 @Override
                 public void onResponse(Call<AuthData> call, Response<AuthData> response) {
-                    if(response.isSuccessful()) {
+                    if (response.isSuccessful()) {
                         authData.setMessage(response.body().getMessage());
                         authData.setSuccess(response.body().getSuccess());
-                        System.out.println("MESSAGE "+authData.getSuccess());
+                        System.out.println("MESSAGE " + authData.getSuccess());
                         authCallBackInterface.callBackCall(authData);
 
                     }
@@ -49,7 +47,7 @@ public class AuthRequest implements AuthRequestInterface {
                     System.out.println("FAIL");
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
 

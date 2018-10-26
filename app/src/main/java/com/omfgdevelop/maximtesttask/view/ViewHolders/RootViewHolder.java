@@ -9,6 +9,7 @@ import com.unnamed.b.atv.model.TreeNode;
 
 public class RootViewHolder extends TreeNode.BaseNodeViewHolder {
     Context context;
+
     public RootViewHolder(Context context) {
         super(context);
         this.context = context;
@@ -17,7 +18,7 @@ public class RootViewHolder extends TreeNode.BaseNodeViewHolder {
     @Override
     public View createNodeView(TreeNode node, Object value) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.root_view,null,false);
+        View view = layoutInflater.inflate(R.layout.root_view, null, false);
         return view;
     }
 }

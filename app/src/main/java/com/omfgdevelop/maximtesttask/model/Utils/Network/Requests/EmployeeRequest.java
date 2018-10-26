@@ -1,8 +1,10 @@
 package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
 
+import android.util.Log;
+
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Employee.*;
 import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
+import com.omfgdevelop.maximtesttask.model.Employee.Office;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
 import com.omfgdevelop.maximtesttask.view.interfaces.TreeViewFragmetnInterface;
@@ -16,18 +18,17 @@ import retrofit2.Response;
 
 public class EmployeeRequest implements TreeViewFragmetnInterface.Model.Request {
 
-   EmployeeData employeeData;
-   RecyclerViewCallBackInterface callBack;
-   Credentials credentials;
-
+    EmployeeData employeeData;
+    RecyclerViewCallBackInterface callBack;
+    Credentials credentials;
     public EmployeeRequest() {
-        this.employeeData = employeeData;
-        this.callBack = callBack;
-        this.credentials = credentials;
+
     }
 
     @Override
-    public void getEmoloyees( final RecyclerViewCallBackInterface callBack, Credentials credentials) {
+    public void getEmoloyees(final RecyclerViewCallBackInterface callBack, Credentials credentials) {
+        this.callBack = callBack;
+        this.credentials = credentials;
         employeeData = new EmployeeData();
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         try {
@@ -37,24 +38,20 @@ public class EmployeeRequest implements TreeViewFragmetnInterface.Model.Request 
             request.enqueue(new Callback<EmployeeData>() {
                 @Override
                 public void onResponse(Call<EmployeeData> call, Response<EmployeeData> response) {
-                   parceJson(response,callBack);
+                    parceJson(response, callBack);
                 }
-
                 @Override
                 public void onFailure(Call<EmployeeData> call, Throwable t) {
-
                     System.out.println(t.getMessage());
                 }
             });
-
-
-        }catch (Exception e){e.printStackTrace();}
-
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    void parceJson(Response<EmployeeData> response, RecyclerViewCallBackInterface callBack){
-        if(response.isSuccessful()) {
+
+    void parceJson(Response<EmployeeData> response, RecyclerViewCallBackInterface callBack) {
+        if (response.isSuccessful()) {
             List<Office> officeList = new ArrayList<>();
 
             for (int i = 0; i < response.body().getOffices().size(); i++) {
@@ -69,8 +66,9 @@ public class EmployeeRequest implements TreeViewFragmetnInterface.Model.Request 
             employeeData.setID(response.body().getID());
             employeeData.setOffices(officeList);
             callBack.callBack(employeeData);
-        }else {
+        } else {
 
+            Log.d("REQUEST LOG", "FAIL");
         }
     }
 }

@@ -1,4 +1,3 @@
-
 package com.omfgdevelop.maximtesttask.model;
 
 import com.google.gson.annotations.Expose;

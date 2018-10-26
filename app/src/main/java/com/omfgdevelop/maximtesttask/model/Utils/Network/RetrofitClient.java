@@ -1,7 +1,5 @@
 package com.omfgdevelop.maximtesttask.model.Utils.Network;
 
-import android.provider.SyncStateContract;
-
 import com.omfgdevelop.maximtesttask.BuildConfig;
 import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RetrofitInterface;
 

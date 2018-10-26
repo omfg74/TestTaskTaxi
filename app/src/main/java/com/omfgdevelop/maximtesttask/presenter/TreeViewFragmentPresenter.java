@@ -31,18 +31,17 @@ public class TreeViewFragmentPresenter implements RecyclerViewCallBackInterface,
 
     @Override
     public void getSavedData() {
-
-        Settings settings = new Settings(ContentProvider.getContext().getSharedPreferences("settings", Context.MODE_PRIVATE));
-        credentials = settings.getCredentials();
+        Settings settings = new Settings(ContentProvider.getContext().getSharedPreferences(Settings.STORAGE_NAME, Context.MODE_PRIVATE));
+        this.credentials = settings.getCredentials();
     }
 
     @Override
     public void itemClicked(AbstractEmployee abstractEmployee) {
-       view.attachFragmentToContainer(abstractEmployee);
+        view.attachFragmentToContainer(abstractEmployee);
     }
 
-    public void getData(){
-        modelRequest.getEmoloyees(this,credentials );
+    public void getData() {
+        modelRequest.getEmoloyees(this, this.credentials);
     }
 
     @Override
