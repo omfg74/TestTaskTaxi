@@ -6,9 +6,9 @@ import com.omfgdevelop.maximtesttask.ContentProvider;
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
 import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.EmployeeRequest;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
-import com.omfgdevelop.maximtesttask.model.Utils.Settings;
+import com.omfgdevelop.maximtesttask.Utils.Network.Requests.EmployeeRequest;
+import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.RecyclerViewCallBackInterface;
+import com.omfgdevelop.maximtesttask.Utils.Settings;
 import com.omfgdevelop.maximtesttask.view.interfaces.TreeViewFragmetnInterface;
 
 public class TreeViewFragmentPresenter implements RecyclerViewCallBackInterface, TreeViewFragmetnInterface.Presenter {

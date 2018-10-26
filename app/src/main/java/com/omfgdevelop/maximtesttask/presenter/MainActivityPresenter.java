@@ -6,7 +6,7 @@ import com.omfgdevelop.maximtesttask.ContentProvider;
 import com.omfgdevelop.maximtesttask.view.interfaces.MainActivityInterface;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.omfgdevelop.maximtesttask.model.Utils.Settings.STORAGE_NAME;
+import static com.omfgdevelop.maximtesttask.Utils.Settings.STORAGE_NAME;
 
 public class MainActivityPresenter implements MainActivityInterface.Presenter {
     private MainActivityInterface.View view;

@@ -1,4 +1,4 @@
-package com.omfgdevelop.maximtesttask.model.Utils;
+package com.omfgdevelop.maximtesttask.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

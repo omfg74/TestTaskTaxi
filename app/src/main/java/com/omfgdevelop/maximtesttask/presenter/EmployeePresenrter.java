@@ -1,6 +1,5 @@
 package com.omfgdevelop.maximtesttask.presenter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -11,8 +10,8 @@ import android.os.Bundle;
 import com.omfgdevelop.maximtesttask.ContentProvider;
 import com.omfgdevelop.maximtesttask.model.AbstractEmployee;
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.ImageRequest;
-import com.omfgdevelop.maximtesttask.model.Utils.Settings;
+import com.omfgdevelop.maximtesttask.Utils.Network.Requests.ImageRequest;
+import com.omfgdevelop.maximtesttask.Utils.Settings;
 import com.omfgdevelop.maximtesttask.view.interfaces.EmployeeImageCallBack;
 import com.omfgdevelop.maximtesttask.view.interfaces.EmployeeInterFace;
 

@@ -1,6 +1,6 @@
-package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
+package com.omfgdevelop.maximtesttask.Utils.Network.Requests;
 
-import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
+import com.omfgdevelop.maximtesttask.Utils.Network.RetrofitClient;
 import com.omfgdevelop.maximtesttask.view.interfaces.EmployeeImageCallBack;
 import com.omfgdevelop.maximtesttask.view.interfaces.EmployeeInterFace;
 

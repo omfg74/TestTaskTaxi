@@ -1,12 +1,12 @@
-package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
+package com.omfgdevelop.maximtesttask.Utils.Network.Requests;
 
 import android.util.Log;
 
 import com.omfgdevelop.maximtesttask.model.Credentials;
 import com.omfgdevelop.maximtesttask.model.Employee.EmployeeData;
 import com.omfgdevelop.maximtesttask.model.Employee.Office;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RecyclerViewCallBackInterface;
+import com.omfgdevelop.maximtesttask.Utils.Network.RetrofitClient;
+import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.RecyclerViewCallBackInterface;
 import com.omfgdevelop.maximtesttask.view.interfaces.TreeViewFragmetnInterface;
 
 import java.util.ArrayList;

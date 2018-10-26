@@ -1,10 +1,10 @@
-package com.omfgdevelop.maximtesttask.model.Utils.Network.Requests;
+package com.omfgdevelop.maximtesttask.Utils.Network.Requests;
 
 import com.omfgdevelop.maximtesttask.model.AuthData;
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.RetrofitClient;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthCallBackInterface;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthRequestInterface;
+import com.omfgdevelop.maximtesttask.Utils.Network.RetrofitClient;
+import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.AuthCallBackInterface;
+import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.AuthRequestInterface;
 import com.omfgdevelop.maximtesttask.presenter.MainActivityPresenter;
 
 import retrofit2.Call;

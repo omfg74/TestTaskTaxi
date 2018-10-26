@@ -5,13 +5,13 @@ import android.content.Context;
 import com.omfgdevelop.maximtesttask.ContentProvider;
 import com.omfgdevelop.maximtesttask.model.AuthData;
 import com.omfgdevelop.maximtesttask.model.Credentials;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.Requests.AuthRequest;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthCallBackInterface;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthRequestInterface;
-import com.omfgdevelop.maximtesttask.model.Utils.Settings;
+import com.omfgdevelop.maximtesttask.Utils.Network.Requests.AuthRequest;
+import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.AuthCallBackInterface;
+import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.AuthRequestInterface;
+import com.omfgdevelop.maximtesttask.Utils.Settings;
 import com.omfgdevelop.maximtesttask.view.interfaces.AuthFragmentInterface;
 
-//import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.AuthInterface;
+//import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.AuthInterface;
 
 public class AuthPresenter implements AuthFragmentInterface.Presenter, AuthCallBackInterface {
     private AuthFragmentInterface.View view;

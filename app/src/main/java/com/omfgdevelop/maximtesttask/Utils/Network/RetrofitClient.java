@@ -1,7 +1,7 @@
-package com.omfgdevelop.maximtesttask.model.Utils.Network;
+package com.omfgdevelop.maximtesttask.Utils.Network;
 
 import com.omfgdevelop.maximtesttask.BuildConfig;
-import com.omfgdevelop.maximtesttask.model.Utils.Network.interfaces.RetrofitInterface;
+import com.omfgdevelop.maximtesttask.Utils.Network.interfaces.RetrofitInterface;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
