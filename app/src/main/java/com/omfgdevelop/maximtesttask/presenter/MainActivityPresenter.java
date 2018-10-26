@@ -3,13 +3,12 @@ package com.omfgdevelop.maximtesttask.presenter;
 import android.content.SharedPreferences;
 
 import com.omfgdevelop.maximtesttask.ContentProvider;
-import com.omfgdevelop.maximtesttask.view.interfaces.FragmentContract;
 import com.omfgdevelop.maximtesttask.view.interfaces.MainActivityInterface;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.omfgdevelop.maximtesttask.model.Utils.Settings.STORAGE_NAME;
 
-public class MainActivityPresenter implements MainActivityInterface.Presenter, FragmentContract.Presenter {
+public class MainActivityPresenter implements MainActivityInterface.Presenter {
     private MainActivityInterface.View view;
 
     public MainActivityPresenter(MainActivityInterface.View view) {
@@ -22,9 +21,6 @@ public class MainActivityPresenter implements MainActivityInterface.Presenter, F
         view.attachFragmentToContainer();
     }
 
-    @Override
-    public void addFragment(AbstractFragment fragment) {
-    }
 
     @Override
     public void deleteSettings() {
